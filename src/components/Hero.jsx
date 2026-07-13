@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaWhatsapp, FaArrowRight } from 'react-icons/fa';
+import { FaArrowRight } from 'react-icons/fa';
 import { config } from '../data/config';
 
 const Hero = ({ dynamicConfig }) => {
@@ -84,16 +84,7 @@ const Hero = ({ dynamicConfig }) => {
             <span>View Menu</span>
             <FaArrowRight className="text-xs" />
           </a>
-          
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-accent hover:bg-accent-dark text-white font-heading tracking-wider text-sm font-bold px-8 py-4 rounded-full shadow-premium hover:scale-105 transition-all duration-300 border border-primary/20"
-          >
-            <FaWhatsapp className="text-lg animate-bounce" />
-            <span>Order on WhatsApp</span>
-          </a>
+
         </motion.div>
       </div>
 

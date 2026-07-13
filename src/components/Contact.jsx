@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaMapMarkerAlt, FaPhoneAlt, FaClock, FaWhatsapp } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 import { config } from '../data/config';
 
 const Contact = ({ dynamicConfig }) => {
@@ -60,21 +60,7 @@ const Contact = ({ dynamicConfig }) => {
                   </div>
                 </div>
 
-                {/* Phone */}
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 bg-primary/10 rounded-xl text-primary text-base flex-shrink-0 mt-0.5 border border-primary/10">
-                    <FaPhoneAlt />
-                  </div>
-                  <div>
-                    <h4 className="font-heading font-bold text-accent text-sm uppercase tracking-wider">Phone / WhatsApp</h4>
-                    <a 
-                      href={`tel:${phoneNum}`} 
-                      className="text-grayText hover:text-primary text-xs sm:text-sm mt-1 block font-sans font-semibold transition-colors duration-300"
-                    >
-                      {phoneFormatted}
-                    </a>
-                  </div>
-                </div>
+
 
                 {/* Hours */}
                 <div className="flex items-start space-x-4">
@@ -90,18 +76,7 @@ const Contact = ({ dynamicConfig }) => {
                 </div>
               </div>
 
-              {/* Order on WhatsApp CTA */}
-              <div className="pt-6 border-t border-primary/10">
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center space-x-3 bg-accent hover:bg-accent-dark text-white font-heading tracking-wider font-bold text-xs uppercase py-4 rounded-xl shadow-premium hover:shadow-premium-hover transition-all duration-300 hover:scale-[1.02] border border-primary/20 w-full"
-                >
-                  <FaWhatsapp className="text-lg animate-pulse" />
-                  <span>Order on WhatsApp</span>
-                </a>
-              </div>
+
 
             </div>
           </div>

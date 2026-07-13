@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-scroll';
-import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaLock } from 'react-icons/fa';
 import { config } from '../data/config';
 import { Logo } from './Navbar';
 
@@ -65,32 +65,26 @@ const Footer = ({ dynamicConfig }) => {
                   </Link>
                 </li>
               ))}
-              <li>
+              <li className="flex items-center">
                 <a
                   href="/admin"
-                  className="text-gray-400 hover:text-primary text-xs sm:text-sm transition-colors duration-300 cursor-pointer font-heading font-bold uppercase tracking-wider"
+                  className="inline-flex items-center space-x-1.5 border border-primary/30 hover:border-primary text-primary hover:text-white px-3 py-1.5 rounded-xl text-xs font-heading font-bold uppercase tracking-wider transition-all duration-300 hover:scale-105"
                 >
-                  Admin Panel
+                  <FaLock className="text-[10px]" />
+                  <span>Management Portal</span>
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Column 3 - Socials & Phone */}
-          <div className="md:col-span-3 space-y-4 flex flex-col md:items-end">
-            <div className="space-y-1 md:text-right">
-              <span className="text-gray-500 text-[10px] uppercase font-bold tracking-wider block">Call / WhatsApp</span>
-              <a href={`tel:${phoneNum}`} className="text-white hover:text-primary font-heading font-bold tracking-wide text-base transition-colors duration-300">
-                {phoneFormatted}
-              </a>
-            </div>
+          {/* Column 3 - Socials */}
+          <div className="md:col-span-3 space-y-4 flex flex-col md:items-end w-full sm:w-auto justify-center">
             
             {/* Social Icons */}
             <div className="flex space-x-3">
               {[
                 { icon: <FaFacebookF />, url: "https://facebook.com", label: "Facebook" },
-                { icon: <FaInstagram />, url: "https://instagram.com", label: "Instagram" },
-                { icon: <FaWhatsapp />, url: whatsappUrl, label: "WhatsApp" }
+                { icon: <FaInstagram />, url: "https://instagram.com", label: "Instagram" }
               ].map((soc, idx) => (
                 <a
                   key={idx}
@@ -115,7 +109,7 @@ const Footer = ({ dynamicConfig }) => {
             href="/admin"
             className="text-gray-500 hover:text-primary transition-colors duration-300 font-heading text-[11px] tracking-widest uppercase font-bold"
           >
-            Admin Panel
+            Management Portal
           </a>
           <p className="flex items-center space-x-1 font-heading text-[11px] tracking-widest text-primary/80 uppercase font-black">
             <span>Made with love and good vibes</span>

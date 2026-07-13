@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HiMenu, HiX } from 'react-icons/hi';
-import { FaPhoneAlt, FaWhatsapp, FaLock } from 'react-icons/fa';
+import { FaLock } from 'react-icons/fa';
 import { config } from '../data/config';
 
 const Logo = ({ className = "w-10 h-10" }) => (
@@ -148,25 +148,7 @@ const Navbar = ({ setActiveCategory, dynamicConfig }) => {
             ))}
           </nav>
 
-          {/* Contact CTAs */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <a
-              href={phoneCallLink}
-              className="flex items-center space-x-2 bg-accent hover:bg-accent-dark text-white font-medium text-xs px-4 py-2 rounded-full shadow-sm transition-all duration-300 hover:-translate-y-0.5"
-            >
-              <FaPhoneAlt className="text-xs" />
-              <span>Call {phoneFormatted}</span>
-            </a>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 bg-primary hover:bg-primary-dark text-white font-medium text-xs px-4 py-2 rounded-full shadow-sm transition-all duration-300 hover:-translate-y-0.5"
-            >
-              <FaWhatsapp className="text-sm" />
-              <span>WhatsApp</span>
-            </a>
-          </div>
+          {/* Contact CTAs Removed */}
 
           {/* Mobile Hamburger Toggle */}
           <button
@@ -227,30 +209,12 @@ const Navbar = ({ setActiveCategory, dynamicConfig }) => {
                 className="font-heading font-bold uppercase tracking-wider text-sm py-2 cursor-pointer transition-all duration-300 border-l-4 pl-3 rounded text-darkText border-transparent hover:text-primary hover:border-primary/20 flex items-center space-x-2"
               >
                 <FaLock className="text-xs text-primary/70" />
-                <span>Admin Portal</span>
+                <span>Management Portal</span>
               </a>
             </nav>
           </div>
 
-          {/* Mobile Footer CTA */}
-          <div className="border-t border-primary/10 pt-4 flex flex-col space-y-3">
-            <a
-              href={phoneCallLink}
-              className="flex items-center justify-center space-x-2 bg-accent text-white py-3 rounded-full shadow-premium text-sm font-semibold hover:bg-accent-dark transition-colors duration-300"
-            >
-              <FaPhoneAlt className="text-xs" />
-              <span>Call Now</span>
-            </a>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center space-x-2 bg-primary text-white py-3 rounded-full shadow-premium text-sm font-semibold hover:bg-primary-dark transition-colors duration-300"
-            >
-              <FaWhatsapp className="text-sm" />
-              <span>Order on WhatsApp</span>
-            </a>
-          </div>
+
         </div>
       </div>
 

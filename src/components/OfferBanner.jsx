@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaTag, FaPercentage, FaPizzaSlice, FaClock, FaWhatsapp } from 'react-icons/fa';
+import { FaTag, FaPercentage, FaPizzaSlice, FaClock } from 'react-icons/fa';
 
 const offers = [
   {
@@ -110,14 +110,10 @@ const OfferBanner = () => {
                   </div>
                 </div>
 
-                {/* Claim Button */}
-                <button
-                  onClick={() => handleClaimOffer(offer.whatsappMsg)}
-                  className="mt-6 w-full flex items-center justify-center space-x-2 bg-accent hover:bg-accent-dark text-white font-bold py-3 px-5 rounded-xl shadow-md transition-all duration-300 group-hover:scale-[1.02]"
-                >
-                  <FaWhatsapp className="text-lg" />
-                  <span>Claim on WhatsApp</span>
-                </button>
+                {/* Claim Info */}
+                <div className="mt-6 text-center py-3.5 px-5 bg-accent/10 border border-accent/20 rounded-xl text-accent font-heading font-bold text-xs uppercase tracking-wider">
+                  Show code at counter to claim
+                </div>
               </div>
             </motion.div>
           ))}

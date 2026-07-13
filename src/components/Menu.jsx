@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { categories, menuItems as defaultMenuItems } from '../data/menu';
-import { FaSearch, FaStar, FaWhatsapp } from 'react-icons/fa';
+import { FaSearch, FaStar } from 'react-icons/fa';
 import { db } from '../firebase';
 import { collection, onSnapshot, doc, setDoc } from 'firebase/firestore';
 
@@ -244,13 +244,7 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
                       </span>
                     </div>
 
-                    <button
-                      onClick={() => handleWhatsAppOrder(item.name, item.price)}
-                      className="flex items-center space-x-1.5 bg-primary hover:bg-primary-dark text-white font-heading tracking-wider font-bold text-[10px] uppercase px-4 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all duration-300"
-                    >
-                      <FaWhatsapp className="text-sm" />
-                      <span>Order</span>
-                    </button>
+
                   </div>
                 </div>
 
