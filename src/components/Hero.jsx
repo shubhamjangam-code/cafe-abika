@@ -51,12 +51,8 @@ const Hero = ({ dynamicConfig }) => {
           transition={{ delay: 0.2, duration: 0.8 }}
           className="font-heading font-black text-white tracking-wide leading-tight text-shadow-premium uppercase"
         >
-          <span className="text-xl sm:text-3xl md:text-4xl block font-semibold text-secondary-dark">
-            Fresh Casual Bites <span className="text-primary">•</span> Artisan Drinks
-          </span>
-          <span className="text-gold tracking-widest block mt-2 text-3xl sm:text-5xl md:text-6xl font-heading">
-            Your Favorite Veg Cafe
-          </span>
+          <span className="text-xl sm:text-3xl md:text-4xl block sm:inline text-secondary-dark">Good Food <span className="text-primary">•</span> Good Vibes</span>
+          <span className="text-gold tracking-widest block mt-2 text-3xl sm:text-5xl md:text-6xl font-heading">Divine Taste</span>
         </motion.h1>
 
         {/* 3 Quick Value Pillars */}
