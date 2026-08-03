@@ -62,22 +62,22 @@ const Contact = ({ dynamicConfig }) => {
                         {phoneFormatted}
                       </a>
                     </p>
-                    <div className="mt-2 flex items-center space-x-2">
+                    <div className="mt-3 flex items-center space-x-2.5">
                       <a
                         href={whatsappUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center space-x-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition-colors"
+                        className="inline-flex items-center space-x-1.5 bg-emerald-50 hover:bg-emerald-600 text-emerald-800 hover:text-white border border-emerald-300/60 hover:border-emerald-600 text-xs font-semibold px-3.5 py-1.5 rounded-full shadow-xs transition-all duration-300"
                       >
-                        <FaWhatsapp className="text-sm" />
-                        <span>Chat on WhatsApp</span>
+                        <FaWhatsapp className="text-sm text-emerald-600 group-hover:text-white" />
+                        <span>WhatsApp</span>
                       </a>
                       <a
                         href={`tel:+91${phoneNum}`}
-                        className="inline-flex items-center space-x-1.5 bg-accent hover:bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition-colors"
+                        className="inline-flex items-center space-x-1.5 bg-white hover:bg-accent text-accent hover:text-white border border-primary/20 hover:border-accent text-xs font-semibold px-3.5 py-1.5 rounded-full shadow-xs transition-all duration-300"
                       >
-                        <FaPhoneAlt className="text-xs" />
-                        <span>Call Shop</span>
+                        <FaPhoneAlt className="text-[10px]" />
+                        <span>Call Direct</span>
                       </a>
                     </div>
                   </div>
