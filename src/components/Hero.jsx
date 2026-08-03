@@ -15,7 +15,7 @@ const Hero = ({ dynamicConfig }) => {
     >
       {/* Atmospheric Live Cafe Background Image */}
       <div 
-        className="absolute inset-0 w-full h-full bg-cover bg-center animate-zoom-bg opacity-70"
+        className="absolute inset-0 w-full h-full bg-cover bg-center animate-zoom-bg opacity-75"
         style={{ 
           backgroundImage: "url('/ambika_cafe_live_hero_bg.png')" 
         }}
@@ -24,8 +24,46 @@ const Hero = ({ dynamicConfig }) => {
       {/* Devotional Mandala Layer Overlay */}
       <div className="absolute inset-0 mandala-pattern opacity-20 z-10" />
 
+      {/* Weightless Floating Antigravity Particles Overlay */}
+      <div className="absolute inset-0 pointer-events-none z-15 overflow-hidden">
+        {/* Particle 1: Golden Ember / Dust particle */}
+        <motion.div
+          animate={{ y: [-20, 20, -20], x: [-10, 10, -10], rotate: [0, 180, 360] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 left-1/6 w-3 h-3 bg-gold/40 rounded-full blur-[1px] shadow-[0_0_10px_#D4AF37]"
+        />
+        {/* Particle 2: Floating Leaf Element */}
+        <motion.div
+          animate={{ y: [15, -25, 15], x: [10, -15, 10], rotate: [-10, 20, -10] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute top-1/3 right-1/5 text-emerald-400/60 text-lg blur-[0.5px]"
+        >
+          🌿
+        </motion.div>
+        {/* Particle 3: Floating Golden Chip */}
+        <motion.div
+          animate={{ y: [-30, 20, -30], x: [-15, 15, -15], rotate: [15, -25, 15] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          className="absolute bottom-1/3 left-1/5 text-amber-300/50 text-xl blur-[0.5px]"
+        >
+          🥔
+        </motion.div>
+        {/* Particle 4: Rising Steam Effect */}
+        <motion.div
+          animate={{ y: [0, -40, -80], opacity: [0, 0.6, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeOut" }}
+          className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-16 h-24 bg-gradient-to-t from-white/20 via-white/10 to-transparent blur-md rounded-full"
+        />
+        {/* Particle 5: Shimmering Dust */}
+        <motion.div
+          animate={{ y: [25, -25, 25], scale: [0.8, 1.2, 0.8] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute top-1/5 right-1/4 w-2 h-2 bg-amber-200/50 rounded-full blur-[1px]"
+        />
+      </div>
+
       {/* Subtle Warm Vignette Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-[#1c0f10]/90 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-[#1c0f10]/95 z-10" />
 
       {/* Subtle Bottom Gold Gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-primary/10 to-transparent z-10 pointer-events-none" />
