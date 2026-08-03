@@ -4,15 +4,16 @@ import { FaArrowRight } from 'react-icons/fa';
 import { config } from '../data/config';
 
 const Hero = ({ dynamicConfig }) => {
-  const phoneNum = dynamicConfig?.phone || '7721802321';
-  const whatsappUrl = `https://wa.me/91${phoneNum}`;
-  const subtitleText = dynamicConfig?.subtitle || 'Ambika Cafe serves delicious fast food, refreshing beverages, and warm memories.';
+  const phoneNum = dynamicConfig?.phone || config.phone;
+  const addressText = dynamicConfig?.address || config.address;
+  const hoursText = dynamicConfig?.hours || config.hours;
+  const phoneCallLink = `tel:+91${phoneNum}`;
+  const phoneFormatted = phoneNum.length === 10 
+    ? `+91 ${phoneNum.slice(0, 5)} ${phoneNum.slice(5)}` 
+    : phoneNum;
 
   return (
-    <section 
-      id="home" 
-      className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[#1c0f10]"
-    >
+    <section id="home" className="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden bg-accent">
       {/* Zooming Cafe Background Image */}
       <div 
         className="absolute inset-0 w-full h-full bg-cover bg-center animate-zoom-bg opacity-40"
@@ -24,18 +25,14 @@ const Hero = ({ dynamicConfig }) => {
       {/* Devotional Mandala Layer Overlay (Golden Saffron theme) */}
       <div className="absolute inset-0 mandala-pattern opacity-30 z-10" />
 
-      {/* Dark Overlay Gradient (maroon/black/saffron) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#2C1819]/90 via-[#2C1819]/70 to-[#1c0f10] z-10" />
+      {/* Dark Vignette Overlay for Crisp Contrast */}
+      <div className="absolute inset-0 bg-gradient-to-b from-accent/90 via-accent/75 to-accent/95 z-10" />
 
-      {/* Subtle Bottom Gold Gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-primary/10 to-transparent z-10 pointer-events-none" />
-
-      {/* Main Content Area */}
-      <div className="relative z-20 max-w-5xl mx-auto px-4 text-center flex flex-col items-center">
+      <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center min-h-[75vh]">
         
-        {/* Category / Venue Type Badge */}
+        {/* Top Pure Veg Pill */}
         <motion.div
-          initial={{ opacity: 0, y: -15 }}
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="inline-flex items-center space-x-2 bg-primary/20 backdrop-blur-md text-amber-300 px-4 py-1.5 rounded-full text-xs sm:text-sm font-heading font-bold uppercase tracking-widest mb-6 border border-primary/40 shadow-lg"
@@ -76,7 +73,7 @@ const Hero = ({ dynamicConfig }) => {
           </div>
         </motion.div>
 
-        {/* Buttons Grid */}
+        {/* Call to Action Button */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -100,12 +97,58 @@ const Hero = ({ dynamicConfig }) => {
                 });
               }
             }}
-            className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-primary hover:bg-primary-dark text-white font-heading tracking-wider text-sm font-bold px-8 py-4 rounded-full shadow-premium hover:shadow-premium-hover cursor-pointer transition-all duration-300 hover:scale-105"
+            className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-primary hover:bg-primary-dark text-white font-heading tracking-wider text-sm font-bold px-8 py-3.5 rounded-full shadow-premium hover:shadow-premium-hover cursor-pointer transition-all duration-300 hover:scale-105"
           >
-            <span>View Menu</span>
+            <span>View Interactive Menu</span>
             <FaArrowRight className="text-xs" />
           </a>
+        </motion.div>
 
+        {/* Prominent Always-Visible Address & Opening Hours Glass Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.6 }}
+          className="mt-8 bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-5 max-w-3xl w-full text-white shadow-2xl flex flex-col sm:flex-row items-center justify-around gap-4 text-center sm:text-left"
+        >
+          {/* Opening Hours */}
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-lg shrink-0">
+              <FaClock />
+            </div>
+            <div>
+              <span className="text-[10px] text-emerald-300 uppercase tracking-widest block font-bold">Live Opening Hours</span>
+              <span className="text-xs sm:text-sm font-semibold text-white">{hoursText}</span>
+            </div>
+          </div>
+
+          <div className="hidden sm:block w-px h-8 bg-white/20" />
+
+          {/* Location */}
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-full bg-primary/30 border border-primary/50 flex items-center justify-center text-gold text-lg shrink-0">
+              <FaMapMarkerAlt />
+            </div>
+            <div>
+              <span className="text-[10px] text-amber-200 uppercase tracking-widest block font-bold">Cafe Address</span>
+              <span className="text-xs sm:text-sm font-semibold text-white block">{addressText}</span>
+            </div>
+          </div>
+
+          <div className="hidden sm:block w-px h-8 bg-white/20" />
+
+          {/* Phone */}
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-300 text-lg shrink-0">
+              <FaPhoneAlt />
+            </div>
+            <div>
+              <span className="text-[10px] text-amber-200 uppercase tracking-widest block font-bold">Call / Orders</span>
+              <a href={phoneCallLink} className="text-xs sm:text-sm font-bold text-amber-300 hover:text-white transition-colors block">
+                {phoneFormatted}
+              </a>
+            </div>
+          </div>
         </motion.div>
       </div>
 

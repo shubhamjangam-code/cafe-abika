@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaMapMarkerAlt, FaClock } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaClock, FaPhoneAlt, FaWhatsapp } from 'react-icons/fa';
 import { config } from '../data/config';
 
 const Contact = ({ dynamicConfig }) => {
-  const phoneNum = dynamicConfig?.phone || '7721802321';
-  const addressText = dynamicConfig?.address || 'Opp. Government College, Main Road, City';
-  const hoursText = dynamicConfig?.hours || '7:30 AM - 11:00 PM';
+  const phoneNum = dynamicConfig?.phone || config.phone;
+  const addressText = dynamicConfig?.address || config.address;
+  const hoursText = dynamicConfig?.hours || config.hours;
   const whatsappUrl = `https://wa.me/91${phoneNum}`;
   const phoneFormatted = phoneNum.length === 10 
     ? `+91 ${phoneNum.slice(0, 5)} ${phoneNum.slice(5)}` 
@@ -60,7 +60,18 @@ const Contact = ({ dynamicConfig }) => {
                   </div>
                 </div>
 
-
+                {/* Phone & WhatsApp */}
+                <div className="flex items-start space-x-4">
+                  <div className="p-3 bg-emerald-500/10 rounded-xl text-emerald-600 text-base flex-shrink-0 mt-0.5 border border-emerald-500/20">
+                    <FaPhoneAlt />
+                  </div>
+                  <div>
+                    <h4 className="font-heading font-bold text-accent text-sm uppercase tracking-wider">Phone & Direct Orders</h4>
+                    <a href={`tel:+91${phoneNum}`} className="text-emerald-700 font-bold text-sm sm:text-base hover:underline block mt-1">
+                      {phoneFormatted}
+                    </a>
+                  </div>
+                </div>
 
                 {/* Hours */}
                 <div className="flex items-start space-x-4">
@@ -76,7 +87,25 @@ const Contact = ({ dynamicConfig }) => {
                 </div>
               </div>
 
-
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-primary/10">
+                <a
+                  href={`tel:+91${phoneNum}`}
+                  className="flex-1 inline-flex items-center justify-center space-x-2 bg-accent hover:bg-primary text-white font-bold text-xs uppercase tracking-wider py-3 rounded-xl transition-all shadow-sm"
+                >
+                  <FaPhoneAlt />
+                  <span>Call Now</span>
+                </a>
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider py-3 rounded-xl transition-all shadow-sm"
+                >
+                  <FaWhatsapp className="text-sm" />
+                  <span>WhatsApp</span>
+                </a>
+              </div>
 
             </div>
           </div>
