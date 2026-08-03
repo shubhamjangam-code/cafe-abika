@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Loader from './components/Loader';
 import ScrollProgress from './components/ScrollProgress';
+import AmbientBackground from './components/AmbientBackground';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -45,7 +46,10 @@ function App() {
   }
 
   return (
-    <div className="mandala-pattern min-h-screen bg-lightBg text-darkText selection:bg-primary/20 selection:text-primary">
+    <div className="relative min-h-screen bg-[#120D0B] text-[#FAF5EC] selection:bg-primary/30 selection:text-amber-200 overflow-x-hidden">
+      {/* Global Ambient Background Animation Layer */}
+      <AmbientBackground />
+
       {/* Premium Loader Overlay */}
       <Loader />
 
@@ -54,7 +58,7 @@ function App() {
       <Navbar setActiveCategory={setActiveCategory} dynamicConfig={dynamicConfig} />
 
       {/* Main Single Page Sections */}
-      <main>
+      <main className="relative z-10">
         <Hero dynamicConfig={dynamicConfig} />
         <Menu activeCategory={activeCategory} setActiveCategory={setActiveCategory} dynamicConfig={dynamicConfig} />
         <About />

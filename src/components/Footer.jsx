@@ -18,7 +18,7 @@ const Footer = ({ dynamicConfig }) => {
   const titleRest = titleParts.slice(1).join(' ') || 'Cafe';
 
   return (
-    <footer className="bg-[#2C1819] text-secondary-dark pt-16 pb-8 border-t border-white/5 relative z-10">
+    <footer className="bg-[#120D0B] text-amber-200/80 pt-16 pb-8 border-t border-gold/15 relative z-10">
       
       {/* Repeating subtle pattern overlay */}
       <div className="absolute inset-0 mandala-pattern opacity-[0.015] pointer-events-none" />
@@ -26,17 +26,17 @@ const Footer = ({ dynamicConfig }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Upper Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/5 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-gold/10 items-center">
           
           {/* Column 1 - Brand Info */}
           <div className="md:col-span-5 space-y-4">
             <Link to="home" smooth={true} duration={800} className="flex items-center space-x-3 cursor-pointer group">
               <Logo className="w-10 h-10" />
-              <span className="font-heading font-black text-2xl tracking-wider text-white">
+              <span className="font-heading font-black text-2xl tracking-wider text-amber-200">
                 {titleFirst} <span className="text-primary">{titleRest}</span>
               </span>
             </Link>
-            <p className="text-gray-400 text-xs sm:text-sm max-w-sm leading-relaxed font-sans font-light">
+            <p className="text-amber-100/70 text-xs sm:text-sm max-w-sm leading-relaxed font-sans font-light">
               Serving delicious fast food, refreshing beverages, and warm memories in Islampur. Experience modern vibes blended with divine taste.
             </p>
           </div>

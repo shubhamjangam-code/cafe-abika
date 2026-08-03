@@ -90,8 +90,8 @@ const Navbar = ({ setActiveCategory, dynamicConfig }) => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-md py-3 border-b border-primary/10'
-          : 'bg-gradient-to-b from-black/80 via-black/40 to-transparent py-5'
+          ? 'bg-[#120D0B]/90 backdrop-blur-lg shadow-2xl py-3 border-b border-gold/20'
+          : 'bg-gradient-to-b from-black/90 via-black/50 to-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -105,9 +105,7 @@ const Navbar = ({ setActiveCategory, dynamicConfig }) => {
           >
             <Logo className="w-10 h-10" />
             <div className="flex flex-col">
-              <span className={`font-heading font-black text-xl tracking-wider transition-colors duration-300 ${
-                isScrolled ? 'text-accent' : 'text-white'
-              }`}>
+              <span className="font-heading font-black text-xl tracking-wider text-amber-200">
                 {titleFirst} <span className="text-primary">{titleRest}</span>
               </span>
               <span className="text-[10px] text-emerald-400 tracking-widest font-heading font-bold uppercase -mt-1 drop-shadow-sm flex items-center gap-1">
@@ -126,26 +124,22 @@ const Navbar = ({ setActiveCategory, dynamicConfig }) => {
                 onClick={(e) => handleSmoothScroll(e, link.id)}
                 className={`font-heading font-bold uppercase tracking-wider text-xs transition-colors duration-300 relative py-1 cursor-pointer ${
                   activeSection === link.id
-                    ? isScrolled ? 'text-primary font-black' : 'text-amber-300 font-black'
-                    : isScrolled ? 'text-accent hover:text-primary' : 'text-white/90 hover:text-amber-300'
+                    ? 'text-gold font-black'
+                    : 'text-amber-100/80 hover:text-gold'
                 }`}
               >
                 {link.label}
                 {activeSection === link.id && (
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-full" />
+                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gold rounded-full shadow-[0_0_8px_#D4AF37]" />
                 )}
               </a>
             ))}
 
             <a
               href="/admin"
-              className={`font-heading font-bold uppercase tracking-wider text-xs transition-colors duration-300 flex items-center space-x-1.5 px-3 py-1.5 rounded-full border ${
-                isScrolled
-                  ? 'text-accent border-primary/20 hover:border-primary hover:text-primary hover:bg-secondary/40'
-                  : 'text-white/90 border-white/20 hover:border-amber-300 hover:text-amber-300 hover:bg-white/10'
-              }`}
+              className="font-heading font-bold uppercase tracking-wider text-xs transition-colors duration-300 flex items-center space-x-1.5 px-3 py-1.5 rounded-full border text-amber-200 border-gold/30 hover:border-gold hover:text-gold hover:bg-gold/10"
             >
-              <FaLock className="text-[10px]" />
+              <FaLock className="text-[10px] text-gold" />
               <span>Admin</span>
             </a>
           </nav>
@@ -171,29 +165,29 @@ const Navbar = ({ setActiveCategory, dynamicConfig }) => {
         />
       )}
 
-      {/* Solid 100% Opaque Mobile Drawer Menu */}
+      {/* Solid 100% Opaque Dark Mobile Drawer Menu */}
       <div
-        className={`lg:hidden fixed inset-y-0 right-0 z-[100] w-4/5 max-w-xs bg-[#FAF5EC] shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col justify-between border-l border-primary/20 ${
+        className={`lg:hidden fixed inset-y-0 right-0 z-[100] w-4/5 max-w-xs bg-[#18110E] shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col justify-between border-l border-gold/30 text-amber-100 ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         <div className="p-6">
           {/* Mobile Drawer Header */}
-          <div className="flex items-center justify-between border-b border-primary/15 pb-4 mb-6">
+          <div className="flex items-center justify-between border-b border-gold/20 pb-4 mb-6">
             <div className="flex items-center space-x-3">
               <Logo className="w-9 h-9" />
               <div className="flex flex-col">
-                <span className="font-heading font-black text-lg text-accent">
+                <span className="font-heading font-black text-lg text-amber-200">
                   {titleFirst} <span className="text-primary">{titleRest}</span>
                 </span>
-                <span className="text-[9px] text-emerald-600 font-bold uppercase tracking-wider">
-                  Pure Veg Cafe
+                <span className="text-[9px] text-emerald-400 font-bold uppercase tracking-wider">
+                  100% Pure Veg Cafe
                 </span>
               </div>
             </div>
             <button
               onClick={() => setIsMobileMenuOpen(false)}
-              className="p-2 text-accent hover:text-primary bg-white rounded-full border border-primary/10 shadow-xs transition-colors"
+              className="p-2 text-amber-200 hover:text-gold bg-[#251B17] rounded-full border border-gold/20 shadow-xs transition-colors"
               aria-label="Close menu"
             >
               <HiX className="text-xl" />
@@ -209,42 +203,42 @@ const Navbar = ({ setActiveCategory, dynamicConfig }) => {
                 onClick={(e) => handleSmoothScroll(e, link.id)}
                 className={`font-heading font-bold uppercase tracking-wider text-sm py-3 px-4 rounded-xl flex items-center justify-between cursor-pointer transition-all duration-300 border ${
                   activeSection === link.id
-                    ? 'bg-accent text-white border-accent shadow-md'
-                    : 'bg-white text-accent border-primary/10 hover:bg-secondary'
+                    ? 'bg-gradient-to-r from-primary to-amber-600 text-white border-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]'
+                    : 'bg-[#221815] text-amber-200 border-gold/20 hover:bg-[#2C1F1B]'
                 }`}
               >
                 <span>{link.label}</span>
-                <span className="text-xs opacity-70">→</span>
+                <span className="text-xs text-gold">→</span>
               </a>
             ))}
 
             <a
               href="/admin"
-              className="font-heading font-bold uppercase tracking-wider text-xs py-3 px-4 rounded-xl bg-white text-accent border border-primary/15 hover:bg-secondary flex items-center justify-between mt-2"
+              className="font-heading font-bold uppercase tracking-wider text-xs py-3 px-4 rounded-xl bg-[#221815] text-amber-200 border border-gold/20 hover:bg-[#2C1F1B] flex items-center justify-between mt-2"
             >
               <div className="flex items-center space-x-2">
-                <FaLock className="text-xs text-primary" />
+                <FaLock className="text-xs text-gold" />
                 <span>Management Portal</span>
               </div>
-              <span className="text-xs opacity-70">→</span>
+              <span className="text-xs text-gold">→</span>
             </a>
           </nav>
         </div>
 
         {/* Mobile Drawer Footer Actions */}
-        <div className="p-6 border-t border-primary/15 bg-white space-y-2.5">
+        <div className="p-6 border-t border-gold/20 bg-[#120D0B] space-y-2.5">
           <a
             href={`https://wa.me/91${dynamicConfig?.phone || config.phone}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3 rounded-xl shadow-sm transition-all"
+            className="w-full flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-3 rounded-xl shadow-md border border-emerald-400/30 transition-all"
           >
             <FaWhatsapp className="text-base" />
             <span>Chat on WhatsApp</span>
           </a>
           <a
             href={`tel:+91${dynamicConfig?.phone || config.phone}`}
-            className="w-full flex items-center justify-center space-x-2 bg-accent hover:bg-primary text-white font-bold text-xs py-3 rounded-xl shadow-sm transition-all"
+            className="w-full flex items-center justify-center space-x-2 bg-gold/10 hover:bg-gold hover:text-black text-amber-300 font-bold text-xs py-3 rounded-xl shadow-md border border-gold/30 transition-all"
           >
             <FaPhoneAlt className="text-xs" />
             <span>Call Shop Direct</span>
