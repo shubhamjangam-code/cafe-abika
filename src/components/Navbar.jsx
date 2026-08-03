@@ -186,6 +186,7 @@ const Navbar = ({ setActiveCategory, dynamicConfig }) => {
           </button>
         </div>
       </div>
+    </div>
 
       {/* Mobile Drawer Menu */}
       <div
