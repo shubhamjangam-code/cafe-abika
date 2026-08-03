@@ -20,9 +20,12 @@ const AdminLogin = ({ onLoginSuccess }) => {
     setError('');
     setLoading(true);
 
-    // Fallback/demo admin login credentials
+    // Clear any legacy persistent tokens
+    localStorage.removeItem('admin_session');
+
+    // Admin login credentials authentication
     if (email === 'admin@ambikacafe.com' && password === 'admin123') {
-      localStorage.setItem('admin_session', email);
+      sessionStorage.setItem('admin_active_session', email);
       if (onLoginSuccess) onLoginSuccess({ email });
       setLoading(false);
       return;
@@ -30,6 +33,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      sessionStorage.setItem('admin_active_session', auth.currentUser?.email || email);
       if (onLoginSuccess) onLoginSuccess(auth.currentUser);
     } catch (err) {
       console.error(err);

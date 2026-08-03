@@ -10,11 +10,32 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
   const [menuItems, setMenuItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
 
-  // Subscribe to Menu collection
+  // Subscribe to Menu collection with localStorage fallback & sync
   useEffect(() => {
+    const loadMenuFromStorage = () => {
+      const local = localStorage.getItem('custom_menu_items');
+      if (local) {
+        try {
+          const parsed = JSON.parse(local);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setMenuItems(parsed);
+            return true;
+          }
+        } catch (e) {
+          console.warn("Failed to parse local menu storage:", e);
+        }
+      }
+      return false;
+    };
+
+    // Initial load from storage if available
+    const hasLocal = loadMenuFromStorage();
+    if (!hasLocal) {
+      setMenuItems(defaultMenuItems);
+    }
+
     const unsubscribe = onSnapshot(collection(db, 'menu'), (snapshot) => {
       if (snapshot.empty) {
-        // Automatically seed with default menu items if Firestore is empty
         const seedData = async () => {
           try {
             for (const item of defaultMenuItems) {
@@ -35,20 +56,31 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
           }
         };
         seedData();
-        setMenuItems(defaultMenuItems);
+        if (!loadMenuFromStorage()) {
+          setMenuItems(defaultMenuItems);
+        }
       } else {
         const itemsList = snapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
         }));
         setMenuItems(itemsList);
+        localStorage.setItem('custom_menu_items', JSON.stringify(itemsList));
       }
     }, (error) => {
-      console.warn("Firestore menu fetch failed, falling back to static config:", error);
-      setMenuItems(defaultMenuItems);
+      console.warn("Firestore menu fetch failed, falling back to storage/defaults:", error);
+      if (!loadMenuFromStorage()) {
+        setMenuItems(defaultMenuItems);
+      }
     });
 
-    return () => unsubscribe();
+    const handleCustomEvent = () => loadMenuFromStorage();
+    window.addEventListener('menu_updated', handleCustomEvent);
+
+    return () => {
+      unsubscribe();
+      window.removeEventListener('menu_updated', handleCustomEvent);
+    };
   }, []);
 
   // Filter items whenever menuItems, activeCategory, or searchQuery changes
@@ -163,10 +195,10 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
           ))}
         </div>
 
-        {/* Menu Grid */}
+        {/* Menu Items Container (Single-Screen Mobile Vertical Alignment & Glassmorphism Multi-Row Cards) */}
         <motion.div 
           layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6"
         >
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item) => (
@@ -178,74 +210,105 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
                 viewport={{ once: true }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4 }}
-                whileHover={{ y: -6 }}
-                className="group bg-[#1C1412]/90 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl border border-gold/20 flex flex-col h-full hover:border-gold/60 hover:shadow-[0_0_25px_rgba(212,175,55,0.25)] transition-all duration-300"
+                whileHover={{ y: -4 }}
+                className="group bg-[#1C1412]/90 backdrop-blur-xl rounded-2xl p-4 border border-gold/20 shadow-xl hover:border-gold/50 transition-all duration-300 flex flex-col space-y-3"
               >
-                {/* Image & Badges */}
-                <div className="relative h-48 overflow-hidden bg-black/40">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
+                {/* ROW 1: Circular Food Thumbnail + Rising Steam + Bold Gold Dish Name + Complete Description */}
+                <div className="flex items-start space-x-3.5 relative">
+                  {/* Circular Food Image Container */}
+                  <div className="relative shrink-0 mt-0.5">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-gold/40 shadow-md bg-black/60"
+                    />
 
-                  {/* Steam Vapor Overlay Effect */}
-                  <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-12 h-16 bg-gradient-to-t from-white/25 via-white/10 to-transparent rounded-full blur-md animate-steam" />
-                  </div>
-                  
-                  {/* Rating Badge */}
-                  <div className="absolute top-3 right-3 bg-black/75 backdrop-blur-md px-2.5 py-1 rounded-lg flex items-center space-x-1 border border-gold/30 shadow-sm">
-                    <FaStar className="text-yellow-400 text-xs" />
-                    <span className="text-xs font-bold text-amber-200">{item.rating}</span>
-                  </div>
-
-                  {/* Popular or Chef Rec Badges */}
-                  {item.isChefRecommendation && (
-                    <div className="absolute bottom-3 left-3 bg-primary text-white text-[9px] font-heading font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-md border border-amber-300/40">
-                      Chef Choice
+                    {/* Hot Steam/Vapor Rising Animation Overlay */}
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex space-x-1 pointer-events-none z-10">
+                      <motion.span
+                        animate={{ y: [0, -10, -18], opacity: [0, 0.7, 0], scale: [0.8, 1.2, 1.6] }}
+                        transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
+                        className="w-1 h-3.5 bg-gradient-to-t from-amber-100/50 via-amber-200/30 to-transparent rounded-full blur-[1px]"
+                      />
+                      <motion.span
+                        animate={{ y: [0, -12, -20], opacity: [0, 0.8, 0], scale: [0.8, 1.3, 1.7] }}
+                        transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut", delay: 0.3 }}
+                        className="w-1.5 h-4 bg-gradient-to-t from-amber-100/60 via-amber-200/35 to-transparent rounded-full blur-[1px]"
+                      />
+                      <motion.span
+                        animate={{ y: [0, -8, -16], opacity: [0, 0.6, 0], scale: [0.8, 1.1, 1.5] }}
+                        transition={{ duration: 2.0, repeat: Infinity, ease: "easeOut", delay: 0.6 }}
+                        className="w-1 h-3 bg-gradient-to-t from-amber-100/40 via-amber-200/20 to-transparent rounded-full blur-[1px]"
+                      />
                     </div>
-                  )}
-                  {item.isPopular && !item.isChefRecommendation && (
-                    <div className="absolute bottom-3 left-3 bg-amber-600 text-white text-[9px] font-heading font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-md border border-amber-300/40">
-                      Bestseller
-                    </div>
-                  )}
-                </div>
+                  </div>
 
-                {/* Card Content */}
-                <div className="p-5 flex flex-col justify-between flex-grow">
-                  <div>
-                    <h3 className="font-heading font-bold text-base text-amber-200 group-hover:text-gold transition-colors duration-300">
-                      {item.name}
-                    </h3>
-                    <p className="text-amber-100/70 text-xs mt-2 leading-relaxed font-sans font-light">
+                  {/* Dish Name & Description */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2">
+                      <h3 className="font-heading font-extrabold text-amber-200 group-hover:text-gold text-base sm:text-lg leading-tight tracking-wide transition-colors">
+                        {item.name}
+                      </h3>
+                      <div className="flex items-center space-x-1 shrink-0 bg-black/60 px-2 py-0.5 rounded border border-gold/20 text-xs">
+                        <FaStar className="text-yellow-400 text-[10px]" />
+                        <span className="font-bold text-amber-200 text-[11px]">{item.rating || 4.8}</span>
+                      </div>
+                    </div>
+                    <p className="text-xs text-amber-100/70 font-sans mt-1 leading-relaxed line-clamp-2">
                       {item.description}
                     </p>
                   </div>
-
-                  {/* Price & Order Action */}
-                  <div className="flex items-center justify-between mt-5 pt-4 border-t border-gold/10">
-                    <div>
-                      <span className="text-[10px] text-amber-200/50 font-medium uppercase tracking-wider block">Price</span>
-                      <span className="font-heading font-black text-xl text-amber-300">
-                        ₹{item.price}
-                      </span>
-                    </div>
-
-                    <button
-                      onClick={() => handleWhatsAppOrder(item.name, item.price)}
-                      className="inline-flex items-center justify-center space-x-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl min-h-[44px] transition-colors duration-300 shadow-md border border-emerald-400/30 cursor-pointer"
-                      title="Order via WhatsApp"
-                    >
-                      <FaWhatsapp className="text-sm" />
-                      <span>Order</span>
-                    </button>
-                  </div>
                 </div>
 
+                {/* ROW 2: Category Tag + Price (₹) + Veg Badge + Badges + Order Action Button */}
+                <div className="pt-2.5 border-t border-gold/15 flex flex-wrap items-center justify-between gap-2.5">
+                  {/* Info Cluster */}
+                  <div className="flex flex-wrap items-center gap-2 flex-1 min-w-0">
+                    {/* Category Tag */}
+                    <span className="text-[10px] font-heading font-extrabold text-gold/90 tracking-widest uppercase bg-gold/10 px-2 py-0.5 rounded border border-gold/20">
+                      {item.category?.replace('-', ' ')}
+                    </span>
+
+                    {/* Price */}
+                    <span className="text-sm sm:text-base font-extrabold text-amber-300 font-sans tracking-wide">
+                      ₹{item.price}
+                    </span>
+
+                    {/* Veg Badge */}
+                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold border ${
+                      item.isVeg !== false 
+                        ? 'bg-emerald-950/90 text-emerald-400 border-emerald-500/50 shadow-[0_0_8px_rgba(16,185,129,0.2)]' 
+                        : 'bg-red-950/90 text-red-400 border-red-500/50'
+                    }`}>
+                      <span className={`w-1.5 h-1.5 rounded-full mr-1 ${item.isVeg !== false ? 'bg-emerald-400 animate-pulse' : 'bg-red-500'}`} />
+                      {item.isVeg !== false ? 'Veg' : 'Non-Veg'}
+                    </span>
+
+                    {/* Badges (BESTSELLER / CHEF'S CHOICE) */}
+                    {item.isPopular && (
+                      <span className="text-[9px] bg-amber-600/90 text-white font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-amber-300/40">
+                        BESTSELLER
+                      </span>
+                    )}
+                    {item.isChefRecommendation && (
+                      <span className="text-[9px] bg-primary/90 text-white font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-amber-300/40">
+                        CHEF'S CHOICE
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Action Button: WhatsApp Order */}
+                  <button
+                    onClick={() => handleWhatsAppOrder(item.name, item.price)}
+                    className="inline-flex items-center justify-center space-x-1.5 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white text-xs font-bold px-3.5 py-1.5 rounded-xl transition-all duration-300 shadow-md border border-emerald-400/40 cursor-pointer shrink-0 ml-auto"
+                    title="Order via WhatsApp"
+                  >
+                    <FaWhatsapp className="text-sm text-emerald-100" />
+                    <span>Order</span>
+                  </button>
+                </div>
               </motion.div>
             ))}
           </AnimatePresence>

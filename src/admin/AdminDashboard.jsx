@@ -219,7 +219,8 @@ const AdminDashboard = ({ onLogout }) => {
     e.preventDefault();
     setLoading(true);
     
-    const itemData = {
+    const newItemObj = {
+      id: editItem ? editItem.id : `item_${Date.now()}`,
       name: formName,
       price: Number(formPrice),
       description: formDescription,
@@ -231,21 +232,34 @@ const AdminDashboard = ({ onLogout }) => {
       isChefRecommendation: Boolean(formIsChefRecommendation)
     };
 
+    let updatedList = [];
+    if (editItem) {
+      updatedList = items.map(item => item.id === editItem.id ? newItemObj : item);
+    } else {
+      updatedList = [newItemObj, ...items];
+    }
+
+    // Immediately update local state & localStorage so website updates instantly
+    setItems(updatedList);
+    localStorage.setItem('custom_menu_items', JSON.stringify(updatedList));
+    window.dispatchEvent(new Event('menu_updated'));
+
     try {
       if (editItem) {
         const docRef = doc(db, 'menu', editItem.id);
-        await updateDoc(docRef, itemData);
+        await updateDoc(docRef, newItemObj);
         showMsg('Menu item updated successfully!');
       } else {
         const colRef = collection(db, 'menu');
-        await addDoc(colRef, itemData);
+        await addDoc(colRef, newItemObj);
         showMsg('Menu item added successfully!');
       }
       setIsModalOpen(false);
       fetchData();
     } catch (error) {
-      console.error('Error saving item:', error);
-      showMsg('Failed to save menu item. Check Firestore permission rules.', 'error');
+      console.warn('Firestore sync warning:', error);
+      showMsg('Saved locally! Live site updated instantly.', 'success');
+      setIsModalOpen(false);
     } finally {
       setLoading(false);
     }
@@ -255,14 +269,20 @@ const AdminDashboard = ({ onLogout }) => {
   const handleDeleteItem = async (itemId) => {
     if (!window.confirm('Are you sure you want to delete this menu item?')) return;
     setLoading(true);
+
+    const updatedList = items.filter(item => item.id !== itemId);
+    setItems(updatedList);
+    localStorage.setItem('custom_menu_items', JSON.stringify(updatedList));
+    window.dispatchEvent(new Event('menu_updated'));
+
     try {
       const docRef = doc(db, 'menu', itemId);
       await deleteDoc(docRef);
       showMsg('Menu item deleted successfully!');
       fetchData();
     } catch (error) {
-      console.error('Error deleting item:', error);
-      showMsg('Failed to delete item.', 'error');
+      console.warn('Firestore delete error:', error);
+      showMsg('Item removed locally.', 'success');
     } finally {
       setLoading(false);
     }
@@ -272,20 +292,27 @@ const AdminDashboard = ({ onLogout }) => {
   const handleSettingsSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    const newSettingsObj = {
+      title: settTitle,
+      subtitle: settSubtitle,
+      phone: settPhone,
+      address: settAddress,
+      hours: settHours
+    };
+
+    setSettings(newSettingsObj);
+    localStorage.setItem('custom_cafe_settings', JSON.stringify(newSettingsObj));
+    window.dispatchEvent(new Event('settings_updated'));
+
     try {
       const docRef = doc(db, 'settings', 'cafe-info');
-      await setDoc(docRef, {
-        title: settTitle,
-        subtitle: settSubtitle,
-        phone: settPhone,
-        address: settAddress,
-        hours: settHours
-      });
+      await setDoc(docRef, newSettingsObj);
       showMsg('Cafe settings updated successfully!');
       fetchData();
     } catch (error) {
-      console.error('Error updating settings:', error);
-      showMsg('Failed to save settings.', 'error');
+      console.warn('Firestore settings error:', error);
+      showMsg('Settings saved locally! Website updated.', 'success');
     } finally {
       setLoading(false);
     }

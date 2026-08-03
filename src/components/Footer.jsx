@@ -68,10 +68,14 @@ const Footer = ({ dynamicConfig }) => {
               <li className="flex items-center">
                 <a
                   href="/admin"
-                  className="inline-flex items-center space-x-1.5 border border-primary/30 hover:border-primary text-primary hover:text-white px-3 py-1.5 rounded-xl text-xs font-heading font-bold uppercase tracking-wider transition-all duration-300 hover:scale-105"
+                  onClick={() => {
+                    sessionStorage.removeItem('admin_active_session');
+                    localStorage.removeItem('admin_session');
+                  }}
+                  className="inline-flex items-center space-x-1.5 border border-gold/30 hover:border-gold text-amber-200 hover:text-gold bg-gold/10 hover:bg-gold/20 px-3 py-1.5 rounded-xl text-xs font-heading font-bold uppercase tracking-wider transition-all duration-300 hover:scale-105"
                 >
-                  <FaLock className="text-[10px]" />
-                  <span>Management Portal</span>
+                  <FaLock className="text-[10px] text-gold" />
+                  <span>🔒 Management Portal</span>
                 </a>
               </li>
             </ul>

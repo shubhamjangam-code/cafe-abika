@@ -137,10 +137,15 @@ const Navbar = ({ setActiveCategory, dynamicConfig }) => {
 
             <a
               href="/admin"
-              className="font-heading font-bold uppercase tracking-wider text-xs transition-colors duration-300 flex items-center space-x-1.5 px-3 py-1.5 rounded-full border text-amber-200 border-gold/30 hover:border-gold hover:text-gold hover:bg-gold/10"
+              onClick={() => {
+                sessionStorage.removeItem('admin_active_session');
+                localStorage.removeItem('admin_session');
+              }}
+              className="font-heading font-bold uppercase tracking-wider text-xs transition-colors duration-300 flex items-center space-x-1.5 px-3 py-1.5 rounded-full border text-amber-200 border-gold/40 hover:border-gold hover:text-gold hover:bg-gold/15 shadow-sm"
+              title="Management Portal"
             >
               <FaLock className="text-[10px] text-gold" />
-              <span>Admin</span>
+              <span>🔒 Management Portal</span>
             </a>
           </nav>
 
@@ -214,11 +219,16 @@ const Navbar = ({ setActiveCategory, dynamicConfig }) => {
 
             <a
               href="/admin"
-              className="font-heading font-bold uppercase tracking-wider text-xs py-3 px-4 rounded-xl bg-[#221815] text-amber-200 border border-gold/20 hover:bg-[#2C1F1B] flex items-center justify-between mt-2"
+              onClick={() => {
+                sessionStorage.removeItem('admin_active_session');
+                localStorage.removeItem('admin_session');
+                setIsMobileMenuOpen(false);
+              }}
+              className="font-heading font-bold uppercase tracking-wider text-xs py-3 px-4 rounded-xl bg-[#221815] text-amber-200 border border-gold/30 hover:bg-[#2C1F1B] flex items-center justify-between mt-2"
             >
               <div className="flex items-center space-x-2">
                 <FaLock className="text-xs text-gold" />
-                <span>Management Portal</span>
+                <span>🔒 Management Portal</span>
               </div>
               <span className="text-xs text-gold">→</span>
             </a>

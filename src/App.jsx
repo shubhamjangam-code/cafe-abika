@@ -24,21 +24,44 @@ function App() {
     const path = window.location.pathname;
     setIsAdmin(path.startsWith('/admin'));
 
-    if (!path.startsWith('/admin')) {
-      // Subscribe to real-time configuration changes from Firestore
-      const unsubscribe = onSnapshot(doc(db, 'settings', 'cafe-info'), (docSnap) => {
-        if (docSnap.exists()) {
+    const loadSettingsFromStorage = () => {
+      const local = localStorage.getItem('custom_cafe_settings');
+      if (local) {
+        try {
+          const parsed = JSON.parse(local);
           setDynamicConfig(prev => ({
             ...prev,
-            ...docSnap.data()
+            ...parsed
           }));
+        } catch (e) {
+          console.warn("Failed to parse local cafe settings:", e);
         }
-      }, (err) => {
-        console.warn("Could not load real-time settings, using default configs:", err);
-      });
+      }
+    };
 
-      return () => unsubscribe();
-    }
+    loadSettingsFromStorage();
+
+    const unsubscribe = onSnapshot(doc(db, 'settings', 'cafe-info'), (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setDynamicConfig(prev => ({
+          ...prev,
+          ...data
+        }));
+        localStorage.setItem('custom_cafe_settings', JSON.stringify(data));
+      }
+    }, (err) => {
+      console.warn("Could not load real-time settings, using storage/defaults:", err);
+      loadSettingsFromStorage();
+    });
+
+    const handleSettingsEvent = () => loadSettingsFromStorage();
+    window.addEventListener('settings_updated', handleSettingsEvent);
+
+    return () => {
+      unsubscribe();
+      window.removeEventListener('settings_updated', handleSettingsEvent);
+    };
   }, []);
 
   if (isAdmin) {

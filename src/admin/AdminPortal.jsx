@@ -9,19 +9,17 @@ const AdminPortal = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const localSession = localStorage.getItem('admin_session');
-    if (localSession) {
-      setUser({ email: localSession, isDemo: true });
-      setLoading(false);
-      return;
+    // Clear any legacy persistent localStorage tokens
+    localStorage.removeItem('admin_session');
+
+    // Check active tab session (sessionStorage expires when tab or browser closes)
+    const activeSession = sessionStorage.getItem('admin_active_session');
+    if (activeSession) {
+      setUser({ email: activeSession, isDemo: true });
+    } else {
+      setUser(null);
     }
-
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
+    setLoading(false);
   }, []);
 
   if (loading) {
@@ -30,7 +28,7 @@ const AdminPortal = () => {
         <div className="text-center space-y-4">
           <div className="w-12 h-12 border-4 border-gold border-t-transparent rounded-full animate-spin mx-auto" />
           <p className="text-xs uppercase tracking-widest text-amber-300 font-heading font-black">
-            Verifying Admin Access...
+            Authenticating Admin Session...
           </p>
         </div>
       </div>
@@ -38,12 +36,20 @@ const AdminPortal = () => {
   }
 
   if (!user) {
-    return <AdminLogin onLoginSuccess={(loggedInUser) => setUser(loggedInUser)} />;
+    return (
+      <AdminLogin 
+        onLoginSuccess={(loggedInUser) => {
+          sessionStorage.setItem('admin_active_session', loggedInUser.email || 'admin@ambikacafe.com');
+          setUser(loggedInUser);
+        }} 
+      />
+    );
   }
 
   return (
     <AdminDashboard 
       onLogout={() => {
+        sessionStorage.removeItem('admin_active_session');
         localStorage.removeItem('admin_session');
         setUser(null);
       }} 
