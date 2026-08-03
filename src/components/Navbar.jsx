@@ -250,4 +250,3 @@ const Navbar = ({ setActiveCategory, dynamicConfig }) => {
 };
 
 export default Navbar;
-export { Logo };
