@@ -59,16 +59,6 @@ const Hero = ({ dynamicConfig }) => {
           </span>
         </motion.h1>
 
-        {/* Clear Subtitle Value Proposition */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="mt-6 text-sm sm:text-base md:text-lg text-secondary-dark max-w-2xl font-light leading-relaxed"
-        >
-          Islampur's go-to casual eatery for 100% pure vegetarian fast food & handcrafted beverages. From gourmet grilled sandwiches and crispy burgers to artisan kulhad chai, cold coffee, and thick shakes — crafted fresh for great food and quick hangouts.
-        </motion.p>
-
         {/* 3 Quick Value Pillars */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
