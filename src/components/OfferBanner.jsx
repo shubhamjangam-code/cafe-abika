@@ -41,7 +41,7 @@ const OfferBanner = () => {
   };
 
   return (
-    <section className="py-20 bg-lightBg overflow-hidden">
+    <section className="py-20 bg-[#18110E] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Heading */}
@@ -49,7 +49,7 @@ const OfferBanner = () => {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-3"
+            className="inline-flex items-center space-x-2 bg-gold/10 text-amber-300 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-3 border border-gold/20"
           >
             <FaClock className="text-xs animate-spin" />
             <span>Limited Period Offers</span>
@@ -59,11 +59,11 @@ const OfferBanner = () => {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-heading font-extrabold text-3xl sm:text-4xl text-darkText"
+            className="font-heading font-extrabold text-3xl sm:text-4xl text-amber-100"
           >
             Sizzling Special Offers
           </motion.h2>
-          <div className="w-12 h-1 bg-primary mx-auto mt-4 rounded-full" />
+          <div className="w-12 h-1 bg-gold mx-auto mt-4 rounded-full" />
         </div>
 
         {/* Offers Grid */}

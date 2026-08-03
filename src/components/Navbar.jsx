@@ -142,10 +142,10 @@ const Navbar = ({ setActiveCategory, dynamicConfig }) => {
                 localStorage.removeItem('admin_session');
               }}
               className="font-heading font-bold uppercase tracking-wider text-xs transition-colors duration-300 flex items-center space-x-1.5 px-3 py-1.5 rounded-full border text-amber-200 border-gold/40 hover:border-gold hover:text-gold hover:bg-gold/15 shadow-sm"
-              title="Management Portal"
+              title="Admin Login"
             >
               <FaLock className="text-[10px] text-gold" />
-              <span>🔒 Management Portal</span>
+              <span>Admin</span>
             </a>
           </nav>
 
@@ -228,7 +228,7 @@ const Navbar = ({ setActiveCategory, dynamicConfig }) => {
             >
               <div className="flex items-center space-x-2">
                 <FaLock className="text-xs text-gold" />
-                <span>🔒 Management Portal</span>
+                <span>Admin Login</span>
               </div>
               <span className="text-xs text-gold">→</span>
             </a>

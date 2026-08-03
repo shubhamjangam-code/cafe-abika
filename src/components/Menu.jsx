@@ -28,7 +28,6 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
       return false;
     };
 
-    // Initial load from storage if available
     const hasLocal = loadMenuFromStorage();
     if (!hasLocal) {
       setMenuItems(defaultMenuItems);
@@ -87,12 +86,10 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
   useEffect(() => {
     let result = menuItems;
 
-    // Filter by Category
     if (activeCategory !== 'all') {
       result = result.filter(item => item.category === activeCategory);
     }
 
-    // Filter by Search Query
     if (searchQuery.trim() !== '') {
       result = result.filter(item => 
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -110,7 +107,6 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
     window.open(`https://wa.me/91${phoneNum}?text=${encodedText}`, '_blank');
   };
 
-  // Generate Schema.org JSON-LD for Google Search indexing
   const menuSchema = {
     "@context": "https://schema.org",
     "@type": "Menu",
@@ -129,8 +125,7 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
   };
 
   return (
-    <section id="menu" className="scroll-mt-20 py-24 bg-lightBg relative z-10">
-      {/* Schema.org Structured Microdata for Google Indexing */}
+    <section id="menu" className="scroll-mt-20 py-24 bg-[#120D0B] relative z-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(menuSchema) }}
@@ -138,45 +133,58 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center space-x-1.5 bg-gold/10 text-amber-300 px-4 py-1.5 rounded-full text-xs font-heading font-semibold uppercase tracking-widest mb-4 border border-gold/30 shadow-sm"
-          >
-            <span>Interactive Menu • Instant WhatsApp Order</span>
-          </motion.div>
+        {/* Section Heading with Scroll Reveal */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-12"
+        >
+          <div className="inline-flex items-center space-x-2 bg-amber-500/10 text-amber-300 px-4 py-1.5 rounded-full text-xs font-heading font-bold uppercase tracking-widest mb-3 border border-amber-500/20 backdrop-blur-md shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>Freshly Prepared • 100% Pure Veg</span>
+          </div>
           
-          <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="font-heading font-black text-3xl sm:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-gold to-amber-300 tracking-wide"
-          >
-            Our Fresh & Delicious Menu
-          </motion.h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary via-gold to-accent mx-auto mt-4 rounded-full" />
-        </div>
+          <h2 className="font-heading font-black text-3xl sm:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-amber-200 to-amber-400 tracking-wide">
+            Our Gourmet Menu
+          </h2>
+          <p className="text-[#FAF5EC]/75 text-sm sm:text-base mt-3 font-sans max-w-xl mx-auto leading-relaxed">
+            Handcrafted with authentic spices and fresh local ingredients. Order directly via WhatsApp!
+          </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-amber-600 via-amber-400 to-amber-600 mx-auto mt-4 rounded-full shadow-[0_0_10px_rgba(212,175,55,0.4)]" />
+        </motion.div>
 
-        {/* Search Bar Container */}
-        <div className="flex items-center justify-center mb-10 bg-[#1A120F]/90 p-4 rounded-2xl border border-gold/20 max-w-md mx-auto shadow-inner">
-          {/* Search Box */}
+        {/* Search Bar with Translucent Glass Styling */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="flex items-center justify-center mb-10 max-w-md mx-auto"
+        >
           <div className="relative w-full">
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-gold/70">
+            <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-amber-400/70">
               <FaSearch className="text-sm" />
             </span>
             <input
               type="text"
-              placeholder="Search dishes (e.g. Sandwich, Burger, Coffee)..."
+              placeholder="Search dishes (e.g. Sandwich, Burger, Chai, Coffee)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gold/20 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold text-sm transition-all bg-[#120D0B] text-amber-100 placeholder-amber-200/40"
+              className="w-full pl-11 pr-4 py-3 rounded-full border border-[rgba(212,175,55,0.25)] focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-400 text-sm transition-all bg-[#1C1412]/80 backdrop-blur-xl text-amber-100 placeholder-amber-200/40 shadow-inner"
             />
           </div>
-        </div>
+        </motion.div>
 
-        {/* Horizontal Category Tabs */}
-        <div className="flex items-center gap-3 overflow-x-auto pb-4 mb-12 -mx-4 px-4 scrollbar-thin scrollbar-thumb-primary">
+        {/* Horizontal Category Filter Pills */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="flex items-center justify-start sm:justify-center gap-2.5 overflow-x-auto pb-6 mb-12 -mx-4 px-4 no-scrollbar"
+        >
           {categories.map((cat) => (
             <button
               key={cat.id}
@@ -184,128 +192,98 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
                 setActiveCategory(cat.id);
                 setSearchQuery('');
               }}
-              className={`px-6 py-3 min-h-[44px] rounded-full text-xs font-heading font-bold tracking-wider uppercase transition-all duration-300 whitespace-nowrap border ${
+              className={`px-6 py-2.5 rounded-full text-xs sm:text-sm font-heading font-bold tracking-wider uppercase transition-all duration-300 whitespace-nowrap cursor-pointer border ${
                 activeCategory === cat.id
-                  ? 'bg-gradient-to-r from-primary to-amber-600 text-white border-gold shadow-[0_0_18px_rgba(212,175,55,0.4)] scale-105'
-                  : 'bg-[#1C1412]/80 text-amber-200/80 border-gold/20 hover:border-gold/60 hover:text-white hover:bg-[#251A17]'
+                  ? 'bg-gradient-to-r from-amber-600 to-amber-700 text-white border-amber-400 shadow-[0_0_20px_rgba(212,175,55,0.4)] scale-105'
+                  : 'bg-[#1C1412]/90 text-amber-200/80 border-[rgba(212,175,55,0.2)] hover:border-amber-400/60 hover:text-white hover:bg-[#251A17]'
               }`}
             >
               {cat.name}
             </button>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Menu Items Container (Single-Screen Mobile Vertical Alignment & Glassmorphism Multi-Row Cards) */}
+        {/* Menu Cards Grid - Glassmorphism & Steam Effect */}
         <motion.div 
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
           <AnimatePresence mode="popLayout">
-            {filteredItems.map((item) => (
+            {filteredItems.map((item, idx) => (
               <motion.div
                 layout
                 key={item.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
-                whileHover={{ y: -4 }}
-                className="group bg-[#1C1412]/90 backdrop-blur-xl rounded-2xl p-4 border border-gold/20 shadow-xl hover:border-gold/50 transition-all duration-300 flex flex-col space-y-3"
+                transition={{ duration: 0.5, delay: (idx % 6) * 0.08 }}
+                whileHover={{ y: -6 }}
+                className="group bg-[#1C1412]/85 backdrop-blur-xl rounded-2xl overflow-hidden border border-[rgba(212,175,55,0.2)] hover:border-[rgba(212,175,55,0.6)] shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_0_25px_rgba(212,175,55,0.25)] transition-all duration-300 flex flex-col justify-between"
               >
-                {/* ROW 1: Circular Food Thumbnail + Rising Steam + Bold Gold Dish Name + Complete Description */}
-                <div className="flex items-start space-x-3.5 relative">
-                  {/* Circular Food Image Container */}
-                  <div className="relative shrink-0 mt-0.5">
+                <div>
+                  {/* Top Image Container with Steam Animation */}
+                  <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-black/50">
                     <img
                       src={item.image}
                       alt={item.name}
                       loading="lazy"
                       decoding="async"
-                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-gold/40 shadow-md bg-black/60"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1C1412] via-transparent to-black/40" />
 
-                    {/* Hot Steam/Vapor Rising Animation Overlay */}
+                    {/* Rising Steam Vapor Overlay for Fresh Hot Food */}
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex space-x-1 pointer-events-none z-10">
-                      <motion.span
-                        animate={{ y: [0, -10, -18], opacity: [0, 0.7, 0], scale: [0.8, 1.2, 1.6] }}
-                        transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
-                        className="w-1 h-3.5 bg-gradient-to-t from-amber-100/50 via-amber-200/30 to-transparent rounded-full blur-[1px]"
-                      />
-                      <motion.span
-                        animate={{ y: [0, -12, -20], opacity: [0, 0.8, 0], scale: [0.8, 1.3, 1.7] }}
-                        transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut", delay: 0.3 }}
-                        className="w-1.5 h-4 bg-gradient-to-t from-amber-100/60 via-amber-200/35 to-transparent rounded-full blur-[1px]"
-                      />
-                      <motion.span
-                        animate={{ y: [0, -8, -16], opacity: [0, 0.6, 0], scale: [0.8, 1.1, 1.5] }}
-                        transition={{ duration: 2.0, repeat: Infinity, ease: "easeOut", delay: 0.6 }}
-                        className="w-1 h-3 bg-gradient-to-t from-amber-100/40 via-amber-200/20 to-transparent rounded-full blur-[1px]"
-                      />
+                      <span className="w-1 h-4 bg-gradient-to-t from-amber-100/50 via-amber-200/30 to-transparent rounded-full blur-[1px] animate-steam" />
+                      <span className="w-1.5 h-5 bg-gradient-to-t from-amber-100/60 via-amber-200/35 to-transparent rounded-full blur-[1px] animate-steam [animation-delay:0.4s]" />
+                      <span className="w-1 h-3.5 bg-gradient-to-t from-amber-100/40 via-amber-200/20 to-transparent rounded-full blur-[1px] animate-steam [animation-delay:0.8s]" />
                     </div>
+
+                    {/* Top Right Rating Badge */}
+                    <div className="absolute top-3 right-3 bg-black/75 backdrop-blur-md text-amber-100 text-xs font-extrabold px-2.5 py-1 rounded-lg shadow-md flex items-center space-x-1 border border-[rgba(212,175,55,0.3)]">
+                      <FaStar className="text-yellow-400 text-[11px]" />
+                      <span>{item.rating || 4.8}</span>
+                    </div>
+
+                    {/* Bottom Left Chef Choice / Bestseller Badge */}
+                    {(item.isChefRecommendation || item.isPopular) && (
+                      <div className="absolute bottom-3 left-0 bg-gradient-to-r from-amber-600 to-amber-700 text-white text-[10px] font-heading font-extrabold tracking-wider uppercase px-3 py-1 rounded-r-lg shadow-md border-y border-r border-amber-300/30">
+                        {item.isChefRecommendation ? "CHEF CHOICE" : "BESTSELLER"}
+                      </div>
+                    )}
+
                   </div>
 
-                  {/* Dish Name & Description */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-2">
-                      <h3 className="font-heading font-extrabold text-amber-200 group-hover:text-gold text-base sm:text-lg leading-tight tracking-wide transition-colors">
-                        {item.name}
-                      </h3>
-                      <div className="flex items-center space-x-1 shrink-0 bg-black/60 px-2 py-0.5 rounded border border-gold/20 text-xs">
-                        <FaStar className="text-yellow-400 text-[10px]" />
-                        <span className="font-bold text-amber-200 text-[11px]">{item.rating || 4.8}</span>
-                      </div>
-                    </div>
-                    <p className="text-xs text-amber-100/70 font-sans mt-1 leading-relaxed line-clamp-2">
+                  {/* Card Content Body */}
+                  <div className="pt-5 px-5 pb-4">
+                    <h3 className="font-heading font-extrabold text-amber-200 text-lg leading-tight tracking-wide group-hover:text-amber-100 transition-colors">
+                      {item.name}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#FAF5EC]/75 font-sans mt-2 leading-relaxed line-clamp-3">
                       {item.description}
                     </p>
                   </div>
                 </div>
 
-                {/* ROW 2: Category Tag + Price (₹) + Veg Badge + Badges + Order Action Button */}
-                <div className="pt-2.5 border-t border-gold/15 flex flex-wrap items-center justify-between gap-2.5">
-                  {/* Info Cluster */}
-                  <div className="flex flex-wrap items-center gap-2 flex-1 min-w-0">
-                    {/* Category Tag */}
-                    <span className="text-[10px] font-heading font-extrabold text-gold/90 tracking-widest uppercase bg-gold/10 px-2 py-0.5 rounded border border-gold/20">
-                      {item.category?.replace('-', ' ')}
+                {/* Bottom Price & Order Action Row */}
+                <div className="px-5 pb-5 pt-3 flex items-center justify-between border-t border-[rgba(212,175,55,0.15)] mt-auto bg-black/20">
+                  {/* Left Side: Price Block */}
+                  <div>
+                    <span className="text-[10px] font-bold text-amber-200/50 uppercase tracking-widest block leading-none">
+                      PRICE
                     </span>
-
-                    {/* Price */}
-                    <span className="text-sm sm:text-base font-extrabold text-amber-300 font-sans tracking-wide">
+                    <span className="text-xl sm:text-2xl font-black text-amber-300 tracking-tight font-sans mt-0.5 block">
                       ₹{item.price}
                     </span>
-
-                    {/* Veg Badge */}
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold border ${
-                      item.isVeg !== false 
-                        ? 'bg-emerald-950/90 text-emerald-400 border-emerald-500/50 shadow-[0_0_8px_rgba(16,185,129,0.2)]' 
-                        : 'bg-red-950/90 text-red-400 border-red-500/50'
-                    }`}>
-                      <span className={`w-1.5 h-1.5 rounded-full mr-1 ${item.isVeg !== false ? 'bg-emerald-400 animate-pulse' : 'bg-red-500'}`} />
-                      {item.isVeg !== false ? 'Veg' : 'Non-Veg'}
-                    </span>
-
-                    {/* Badges (BESTSELLER / CHEF'S CHOICE) */}
-                    {item.isPopular && (
-                      <span className="text-[9px] bg-amber-600/90 text-white font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-amber-300/40">
-                        BESTSELLER
-                      </span>
-                    )}
-                    {item.isChefRecommendation && (
-                      <span className="text-[9px] bg-primary/90 text-white font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-amber-300/40">
-                        CHEF'S CHOICE
-                      </span>
-                    )}
                   </div>
 
-                  {/* Action Button: WhatsApp Order */}
+                  {/* Right Side: WhatsApp Order Button */}
                   <button
                     onClick={() => handleWhatsAppOrder(item.name, item.price)}
-                    className="inline-flex items-center justify-center space-x-1.5 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white text-xs font-bold px-3.5 py-1.5 rounded-xl transition-all duration-300 shadow-md border border-emerald-400/40 cursor-pointer shrink-0 ml-auto"
-                    title="Order via WhatsApp"
+                    className="inline-flex items-center justify-center space-x-1.5 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white text-xs sm:text-sm font-bold px-4 py-2.5 rounded-xl shadow-md border border-emerald-400/40 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
                   >
-                    <FaWhatsapp className="text-sm text-emerald-100" />
+                    <FaWhatsapp className="text-base text-emerald-100" />
                     <span>Order</span>
                   </button>
                 </div>
@@ -321,12 +299,12 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
             animate={{ opacity: 1 }}
             className="text-center py-16"
           >
-            <p className="text-grayText text-lg">No dishes found matching your criteria.</p>
+            <p className="text-amber-200/60 text-lg font-sans">No dishes found matching your search.</p>
             <button
               onClick={() => { setActiveCategory('all'); setSearchQuery(''); }}
-              className="mt-4 text-primary font-semibold hover:underline"
+              className="mt-4 text-amber-300 font-bold hover:underline cursor-pointer"
             >
-              Reset Filters
+              Reset Search & Filters
             </button>
           </motion.div>
         )}
@@ -337,3 +315,4 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
 };
 
 export default Menu;
+

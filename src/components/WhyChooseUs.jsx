@@ -47,7 +47,7 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-[#18110E]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Heading */}
@@ -56,12 +56,12 @@ const WhyChooseUs = () => {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-heading font-extrabold text-3xl sm:text-4xl text-darkText"
+            className="font-heading font-extrabold text-3xl sm:text-4xl text-amber-100"
           >
             What Makes Us Special?
           </motion.h2>
-          <div className="w-12 h-1 bg-primary mx-auto mt-4 rounded-full" />
-          <p className="text-grayText mt-4 text-sm sm:text-base">
+          <div className="w-12 h-1 bg-gold mx-auto mt-4 rounded-full" />
+          <p className="text-amber-200/70 mt-4 text-sm sm:text-base font-sans">
             We are dedicated to providing the ultimate gastronomic experience in Islampur. Here is why our customers choose us.
           </p>
         </div>

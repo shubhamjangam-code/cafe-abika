@@ -61,7 +61,7 @@ const categoryCards = [
 
 const Categories = ({ onSelectCategory }) => {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-[#120D0B]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Title */}
@@ -70,11 +70,11 @@ const Categories = ({ onSelectCategory }) => {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-heading font-extrabold text-2xl sm:text-3xl text-darkText"
+            className="font-heading font-extrabold text-2xl sm:text-3xl text-amber-100"
           >
             Explore Popular Categories
           </motion.h2>
-          <div className="w-12 h-1 bg-primary mx-auto mt-3 rounded-full" />
+          <div className="w-12 h-1 bg-gold mx-auto mt-3 rounded-full" />
         </div>
 
         {/* Carousel / Grid layout */}

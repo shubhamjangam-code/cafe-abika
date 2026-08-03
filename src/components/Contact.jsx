@@ -92,11 +92,20 @@ const Contact = ({ dynamicConfig }) => {
                   <div className="p-3 bg-gold/10 text-gold rounded-xl text-base flex-shrink-0 mt-0.5 border border-gold/20">
                     <FaMapMarkerAlt />
                   </div>
-                  <div>
+                  <div className="space-y-1">
                     <h4 className="font-heading font-bold text-amber-300 text-sm uppercase tracking-wider">Address</h4>
-                    <p className="text-amber-100/80 text-xs sm:text-sm mt-1 leading-relaxed font-sans font-light">
+                    <p className="text-amber-100/80 text-xs sm:text-sm leading-relaxed font-sans font-light">
                       {addressText}
                     </p>
+                    <a
+                      href={dynamicConfig?.googleMapsUrl || config.googleMapsUrl || "https://maps.app.goo.gl/tRvpkgNfSYfsAEgf7"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center space-x-1.5 text-xs text-amber-300 hover:text-gold font-bold underline decoration-gold/50 transition-colors pt-1"
+                    >
+                      <FaMapMarkerAlt className="text-[10px]" />
+                      <span>Get Directions on Google Maps →</span>
+                    </a>
                   </div>
                 </div>
 
@@ -117,11 +126,23 @@ const Contact = ({ dynamicConfig }) => {
             </div>
           </div>
 
-          {/* Right Column - Map */}
+          {/* Right Column - Interactive Map Container with Direct Link */}
           <div className="lg:col-span-7">
-            <div className="rounded-3xl overflow-hidden shadow-2xl border border-gold/20 h-80 lg:h-full min-h-[320px] bg-[#120D0B] relative">
+            <div className="rounded-3xl overflow-hidden shadow-2xl border border-gold/20 h-80 lg:h-full min-h-[340px] bg-[#120D0B] relative group">
               {/* Subtle gold framing */}
               <div className="absolute inset-0 border-2 border-gold/20 pointer-events-none rounded-3xl z-10" />
+              
+              {/* Floating Overlay Button */}
+              <a
+                href={dynamicConfig?.googleMapsUrl || config.googleMapsUrl || "https://maps.app.goo.gl/tRvpkgNfSYfsAEgf7"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute top-4 right-4 z-20 bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs px-4 py-2.5 rounded-full shadow-xl flex items-center space-x-2 transition-transform duration-300 hover:scale-105"
+              >
+                <FaMapMarkerAlt />
+                <span>Open in Google Maps</span>
+              </a>
+
               <iframe
                 title="Ambika Cafe Location Map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15250.720337851216!2d74.2562479422026!3d17.039864700000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc106d3381a95e7%3A0xb304b73b5443fa3d!2sIslampur%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1680000000000!5m2!1sen!2sin"

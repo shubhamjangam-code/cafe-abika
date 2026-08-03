@@ -4,8 +4,8 @@ import ScrollProgress from './components/ScrollProgress';
 import AmbientBackground from './components/AmbientBackground';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import About from './components/About';
 import Menu from './components/Menu';
+import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
@@ -88,7 +88,6 @@ function App() {
         <Contact dynamicConfig={dynamicConfig} />
       </main>
 
-
       {/* Footer Branding */}
       <Footer dynamicConfig={dynamicConfig} />
 
@@ -99,4 +98,6 @@ function App() {
 }
 
 export default App;
+
+
 

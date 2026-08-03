@@ -18,7 +18,7 @@ const Testimonials = () => {
   ];
 
   return (
-    <section id="reviews" className="py-20 bg-lightBg overflow-hidden">
+    <section id="reviews" className="py-20 bg-[#18110E] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Heading */}
@@ -27,12 +27,12 @@ const Testimonials = () => {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-heading font-extrabold text-3xl sm:text-4xl text-darkText"
+            className="font-heading font-extrabold text-3xl sm:text-4xl text-amber-100"
           >
             What Our Customers Say
           </motion.h2>
-          <div className="w-12 h-1 bg-primary mx-auto mt-4 rounded-full" />
-          <p className="text-grayText mt-4 text-sm sm:text-base">
+          <div className="w-12 h-1 bg-gold mx-auto mt-4 rounded-full" />
+          <p className="text-amber-200/70 mt-4 text-sm sm:text-base font-sans">
             Read real-time feedback from our food lovers in Islampur.
           </p>
         </div>

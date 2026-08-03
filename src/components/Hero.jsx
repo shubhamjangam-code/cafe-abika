@@ -11,103 +11,78 @@ const Hero = ({ dynamicConfig }) => {
   return (
     <section 
       id="home" 
-      className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[#1c0f10]"
+      className="relative min-h-[85vh] pt-28 pb-16 w-full flex items-center justify-center overflow-hidden bg-[#120D0B]"
     >
       {/* Atmospheric Live Cafe Background Image */}
       <div 
-        className="absolute inset-0 w-full h-full bg-cover bg-center animate-zoom-bg opacity-75 transform-gpu"
+        className="absolute inset-0 w-full h-full bg-cover bg-center animate-zoom-bg opacity-65 transform-gpu"
         style={{ 
           backgroundImage: "url('/ambika_cafe_live_hero_bg.png')" 
         }}
       />
       
       {/* Devotional Mandala Layer Overlay */}
-      <div className="absolute inset-0 mandala-pattern opacity-20 z-10" />
+      <div className="absolute inset-0 mandala-pattern opacity-15 z-10" />
 
-      {/* Lightweight Floating Antigravity Particles Overlay (Desktop & Tablet optimized) */}
-      <div className="hidden sm:block absolute inset-0 pointer-events-none z-15 overflow-hidden transform-gpu">
-        {/* Particle 1: Golden Ember / Dust particle */}
-        <motion.div
-          animate={{ y: [-15, 15, -15] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-1/6 w-2.5 h-2.5 bg-gold/40 rounded-full blur-[1px]"
-        />
-        {/* Particle 2: Floating Leaf Element */}
-        <motion.div
-          animate={{ y: [10, -20, 10] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute top-1/3 right-1/5 text-emerald-400/50 text-base"
-        >
-          🌿
-        </motion.div>
-        {/* Particle 3: Rising Steam Effect */}
-        <motion.div
-          animate={{ y: [0, -30, -60], opacity: [0, 0.5, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeOut" }}
-          className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-12 h-20 bg-gradient-to-t from-white/20 via-white/10 to-transparent blur-md rounded-full"
-        />
-      </div>
-
-      {/* Subtle Warm Vignette Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-[#1c0f10]/95 z-10" />
-
-      {/* Subtle Bottom Gold Gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-primary/10 to-transparent z-10 pointer-events-none" />
+      {/* Subtle Warm Dark Vignette Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-[#120D0B] z-10" />
 
       {/* Main Content Area */}
-      <div className="relative z-20 max-w-5xl mx-auto px-4 text-center flex flex-col items-center">
+      <div className="relative z-20 max-w-4xl mx-auto px-4 text-center flex flex-col items-center">
         
-        {/* Creative Venue Badge */}
+        {/* Compact Glass Venue Badge */}
         <motion.div
-          initial={{ opacity: 0, y: -15 }}
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center space-x-2 bg-black/40 backdrop-blur-md text-amber-200 px-5 py-2 rounded-full text-xs sm:text-sm font-heading font-bold uppercase tracking-widest mb-6 border border-gold/30 shadow-xl"
+          transition={{ duration: 0.5 }}
+          className="inline-flex items-center space-x-2 bg-[#1C1412]/80 backdrop-blur-md text-amber-200 px-4 py-1 rounded-full text-xs font-heading font-bold uppercase tracking-widest mb-4 border border-[rgba(212,175,55,0.3)] shadow-lg"
         >
-          <span className="text-gold">✨</span>
-          <span className="bg-gradient-to-r from-amber-200 via-gold to-amber-100 bg-clip-text text-transparent font-extrabold">
-            Islampur's Favorite Chai & Fast Bites Spot
-          </span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="text-amber-200">100% Pure Veg • Islampur</span>
         </motion.div>
 
-        {/* Large Premium Heading */}
+        {/* Compact Ultra-Premium Title */}
         <motion.h1
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          className="font-heading font-black text-white tracking-wide leading-tight text-shadow-premium uppercase"
+          transition={{ delay: 0.1, duration: 0.6 }}
+          className="font-heading font-black text-white tracking-wide leading-tight uppercase"
         >
-          <span className="text-xl sm:text-3xl md:text-4xl block sm:inline text-secondary-dark">Good Food <span className="text-primary">•</span> Good Vibes</span>
-          <span className="text-gold tracking-widest block mt-2 text-3xl sm:text-5xl md:text-6xl font-heading">Divine Taste</span>
+          <span className="text-2xl sm:text-4xl md:text-5xl block text-amber-100 font-heading tracking-wider">
+            Good Food <span className="text-amber-400">•</span> Good Vibes
+          </span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 tracking-widest block mt-1 text-3xl sm:text-5xl md:text-6xl font-black">
+            Divine Taste
+          </span>
         </motion.h1>
 
-        {/* 3 Quick Value Pillars */}
+        {/* Compact Horizontal Glass Pills */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25, duration: 0.5 }}
+          className="mt-6 flex flex-wrap items-center justify-center gap-2 max-w-2xl"
+        >
+          <span className="bg-[#1C1412]/85 backdrop-blur-xl border border-[rgba(212,175,55,0.25)] text-amber-200 text-xs px-3.5 py-1.5 rounded-full font-medium inline-flex items-center space-x-1.5 shadow-sm">
+            <span>☕</span>
+            <span>Specialty Chai & Coffee</span>
+          </span>
+          <span className="bg-[#1C1412]/85 backdrop-blur-xl border border-[rgba(212,175,55,0.25)] text-amber-200 text-xs px-3.5 py-1.5 rounded-full font-medium inline-flex items-center space-x-1.5 shadow-sm">
+            <span>🍔</span>
+            <span>Gourmet Fast Food</span>
+          </span>
+          <span className="bg-[#1C1412]/85 backdrop-blur-xl border border-[rgba(212,175,55,0.25)] text-amber-200 text-xs px-3.5 py-1.5 rounded-full font-medium inline-flex items-center space-x-1.5 shadow-sm">
+            <span>🌿</span>
+            <span>Cozy Casual Hangout</span>
+          </span>
+        </motion.div>
+
+        {/* Sleek Action CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-3xl"
-        >
-          <div className="bg-white/10 backdrop-blur-md border border-white/15 px-4 py-2.5 rounded-xl text-xs text-amber-200 font-sans flex items-center justify-center space-x-2">
-            <span>☕</span>
-            <span className="font-semibold">Specialty Chai & Coffee</span>
-          </div>
-          <div className="bg-white/10 backdrop-blur-md border border-white/15 px-4 py-2.5 rounded-xl text-xs text-amber-200 font-sans flex items-center justify-center space-x-2">
-            <span>🍔</span>
-            <span className="font-semibold">Crispy Sandwiches & Fast Food</span>
-          </div>
-          <div className="bg-white/10 backdrop-blur-md border border-white/15 px-4 py-2.5 rounded-xl text-xs text-amber-200 font-sans flex items-center justify-center space-x-2">
-            <span>🌿</span>
-            <span className="font-semibold">Cozy Pure Veg Hangout</span>
-          </div>
-        </motion.div>
-
-        {/* Buttons Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-          className="mt-8 flex flex-col sm:flex-row gap-4 items-center justify-center w-full max-w-md sm:max-w-none"
+          transition={{ delay: 0.35, duration: 0.5 }}
+          className="mt-7"
         >
           <a
             href="#menu"
@@ -126,45 +101,13 @@ const Hero = ({ dynamicConfig }) => {
                 });
               }
             }}
-            className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-primary hover:bg-primary-dark text-white font-heading tracking-wider text-sm font-bold px-8 py-4 rounded-full shadow-premium hover:shadow-premium-hover cursor-pointer transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center justify-center space-x-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-heading tracking-wider text-xs font-black px-7 py-3 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300 hover:scale-105 uppercase cursor-pointer"
           >
-            <span>View Menu</span>
+            <span>Explore Menu</span>
             <FaArrowRight className="text-xs" />
           </a>
-
         </motion.div>
-      </div>
 
-      {/* Animated Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center justify-center">
-        <a 
-          href="#menu" 
-          onClick={(e) => {
-            e.preventDefault();
-            const el = document.getElementById('menu');
-            if (el) {
-              const offset = 70;
-              const bodyRect = document.body.getBoundingClientRect().top;
-              const elementRect = el.getBoundingClientRect().top;
-              const elementPosition = elementRect - bodyRect;
-              const offsetPosition = elementPosition - offset;
-              window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-              });
-            }
-          }}
-          className="cursor-pointer flex flex-col items-center"
-        >
-          <span className="text-secondary/60 text-[10px] tracking-widest uppercase mb-2 font-heading">Scroll Down</span>
-          <motion.div 
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            className="w-6 h-10 border-2 border-secondary/40 rounded-full flex justify-center p-1"
-          >
-            <div className="w-1.5 h-2 bg-primary rounded-full" />
-          </motion.div>
-        </a>
       </div>
     </section>
   );
