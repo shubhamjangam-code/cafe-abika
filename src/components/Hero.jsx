@@ -13,19 +13,19 @@ const Hero = ({ dynamicConfig }) => {
       id="home" 
       className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[#1c0f10]"
     >
-      {/* Zooming Cafe Background Image */}
+      {/* Atmospheric Live Cafe Background Image */}
       <div 
-        className="absolute inset-0 w-full h-full bg-cover bg-center animate-zoom-bg opacity-40"
+        className="absolute inset-0 w-full h-full bg-cover bg-center animate-zoom-bg opacity-70"
         style={{ 
-          backgroundImage: "url('/ambika_cafe_hero_bg.png')" 
+          backgroundImage: "url('/ambika_cafe_live_hero_bg.png')" 
         }}
       />
       
-      {/* Devotional Mandala Layer Overlay (Golden Saffron theme) */}
-      <div className="absolute inset-0 mandala-pattern opacity-30 z-10" />
+      {/* Devotional Mandala Layer Overlay */}
+      <div className="absolute inset-0 mandala-pattern opacity-20 z-10" />
 
-      {/* Dark Overlay Gradient (maroon/black/saffron) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#2C1819]/90 via-[#2C1819]/70 to-[#1c0f10] z-10" />
+      {/* Subtle Warm Vignette Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-[#1c0f10]/90 z-10" />
 
       {/* Subtle Bottom Gold Gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-primary/10 to-transparent z-10 pointer-events-none" />
