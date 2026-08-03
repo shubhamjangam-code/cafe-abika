@@ -9,9 +9,9 @@ export const galleryCategories = [
 export const galleryItems = [
   {
     id: 1,
-    title: "Luxury Cafe Vibe",
+    title: "Cozy Pure Veg Cafe Vibe",
     category: "interior",
-    image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800"
+    image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=90&w=1000"
   },
   {
     id: 2,

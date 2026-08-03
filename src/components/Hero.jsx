@@ -15,9 +15,9 @@ const Hero = ({ dynamicConfig }) => {
     >
       {/* Zooming Cafe Background Image */}
       <div 
-        className="absolute inset-0 w-full h-full bg-cover bg-center animate-zoom-bg opacity-50"
+        className="absolute inset-0 w-full h-full bg-cover bg-center animate-zoom-bg opacity-40"
         style={{ 
-          backgroundImage: "url('/maharashtrian_cafe.png')" 
+          backgroundImage: "url('/ambika_cafe_hero_bg.png')" 
         }}
       />
       

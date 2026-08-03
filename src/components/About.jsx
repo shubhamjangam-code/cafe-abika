@@ -31,8 +31,8 @@ const About = () => {
             <div className="absolute -top-4 -left-4 w-full h-full border-2 border-primary/20 rounded-2xl -z-10 translate-x-1 translate-y-1 hidden sm:block" />
             
             <img
-              src="/maharashtrian_cafe.png"
-              alt="Ambika Cafe Authentic Maharashtrian Vibes"
+              src="/ambika_cafe_about.png"
+              alt="Ambika Cafe Pure Veg Casual Ambience and Food"
               className="rounded-2xl shadow-premium object-cover w-full h-[28rem] hover:scale-[1.01] transition-transform duration-500 border border-primary/10"
             />
             
