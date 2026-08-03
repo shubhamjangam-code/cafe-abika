@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HiMenu, HiX } from 'react-icons/hi';
-import { FaPhoneAlt, FaClock, FaMapMarkerAlt, FaWhatsapp } from 'react-icons/fa';
+import { FaPhoneAlt, FaClock, FaMapMarkerAlt, FaWhatsapp, FaLock } from 'react-icons/fa';
 import { config } from '../data/config';
 
 const Logo = ({ className = "w-10 h-10" }) => (
