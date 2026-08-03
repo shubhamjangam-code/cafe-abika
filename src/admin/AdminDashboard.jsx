@@ -43,7 +43,7 @@ const AdminDashboard = ({ onLogout }) => {
   const [formName, setFormName] = useState('');
   const [formPrice, setFormPrice] = useState(30);
   const [formDescription, setFormDescription] = useState('');
-  const [formCategory, setFormCategory] = useState('south-indian');
+  const [formCategory, setFormCategory] = useState('sandwiches-burgers');
   const [formImage, setFormImage] = useState('');
   const [formRating, setFormRating] = useState(4.8);
   const [formIsVeg, setFormIsVeg] = useState(true);
@@ -664,10 +664,10 @@ const AdminDashboard = ({ onLogout }) => {
                     onChange={(e) => setFormCategory(e.target.value)}
                     className="w-full px-4 py-2.5 rounded-xl border border-primary/10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm transition-all bg-white"
                   >
-                    <option value="south-indian">South Indian</option>
-                    <option value="maharashtrian">Maharashtrian</option>
-                    <option value="north-indian">North Indian</option>
-                    <option value="beverages">Tea & Beverages</option>
+                    <option value="sandwiches-burgers">Sandwiches & Burgers</option>
+                    <option value="pizza-bites">Pizza & Fast Bites</option>
+                    <option value="breakfast-specials">Breakfast Specials</option>
+                    <option value="beverages">Tea, Coffee & Shakes</option>
                   </select>
                 </div>
 

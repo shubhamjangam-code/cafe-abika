@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { categories, menuItems as defaultMenuItems } from '../data/menu';
-import { FaSearch, FaStar } from 'react-icons/fa';
+import { FaSearch, FaStar, FaWhatsapp } from 'react-icons/fa';
 import { db } from '../firebase';
 import { collection, onSnapshot, doc, setDoc } from 'firebase/firestore';
 
@@ -78,9 +78,33 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
     window.open(`https://wa.me/91${phoneNum}?text=${encodedText}`, '_blank');
   };
 
+  // Generate Schema.org JSON-LD for Google Search indexing
+  const menuSchema = {
+    "@context": "https://schema.org",
+    "@type": "Menu",
+    "name": "Ambika Cafe Menu",
+    "description": "100% Pure Vegetarian Casual Cafe menu featuring fresh gourmet sandwiches, burgers, pizzas, snacks, kulhad chai, cold coffee, and shakes.",
+    "hasMenuItem": (menuItems.length > 0 ? menuItems : defaultMenuItems).map(item => ({
+      "@type": "MenuItem",
+      "name": item.name,
+      "description": item.description,
+      "offers": {
+        "@type": "Offer",
+        "price": item.price,
+        "priceCurrency": "INR"
+      }
+    }))
+  };
+
   return (
     <section id="menu" className="scroll-mt-20 py-24 bg-lightBg relative z-10">
-      {/* Decorative Top Arch SVG divider (devotional theme) */}
+      {/* Schema.org Structured Microdata for Google Indexing */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(menuSchema) }}
+      />
+
+      {/* Decorative Top Arch SVG divider */}
       <div className="absolute top-0 left-0 right-0 h-8 flex items-center justify-center -translate-y-4">
         <svg className="w-48 h-8 fill-current text-primary/10" viewBox="0 0 100 20" preserveAspectRatio="none">
           <path d="M 0 0 C 30 15, 70 15, 100 0 L 100 20 L 0 20 Z" />
@@ -97,7 +121,7 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center space-x-1.5 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-xs font-heading font-semibold uppercase tracking-widest mb-4 border border-primary/20"
           >
-            <span>Freshly Prepared</span>
+            <span>Interactive Live Menu • Instant Mobile View</span>
           </motion.div>
           
           <motion.h2
@@ -105,7 +129,7 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
             animate={{ opacity: 1, y: 0 }}
             className="font-heading font-black text-3xl sm:text-4xl text-accent tracking-wide"
           >
-            Our Delicious Menu
+            Our Fresh & Delicious Menu
           </motion.h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary via-gold to-accent mx-auto mt-4 rounded-full" />
         </div>
@@ -119,7 +143,7 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
             </span>
             <input
               type="text"
-              placeholder="Search dishes (e.g. Burger, Pizza, Coffee)..."
+              placeholder="Search dishes (e.g. Sandwich, Burger, Coffee)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-primary/10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm transition-all bg-white"
@@ -198,7 +222,7 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
                     <h3 className="font-heading font-bold text-base text-accent group-hover:text-primary transition-colors duration-300">
                       {item.name}
                     </h3>
-                    <p className="text-grayText text-xs mt-2 line-clamp-2 leading-relaxed font-sans font-light">
+                    <p className="text-grayText text-xs mt-2 leading-relaxed font-sans font-light">
                       {item.description}
                     </p>
                   </div>
@@ -207,11 +231,19 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
                   <div className="flex items-center justify-between mt-5 pt-4 border-t border-secondary">
                     <div>
                       <span className="text-[10px] text-grayText font-medium uppercase tracking-wider block">Price</span>
-                      <span className="font-heading font-black text-base text-accent">
+                      <span className="font-heading font-black text-lg text-emerald-700">
                         ₹{item.price}
                       </span>
                     </div>
 
+                    <button
+                      onClick={() => handleWhatsAppOrder(item.name, item.price)}
+                      className="inline-flex items-center space-x-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-2 rounded-xl transition-colors duration-300 shadow-sm"
+                      title="Order via WhatsApp"
+                    >
+                      <FaWhatsapp className="text-sm" />
+                      <span>Order</span>
+                    </button>
                   </div>
                 </div>
 
