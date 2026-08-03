@@ -3,8 +3,8 @@ import { HiMenu, HiX } from 'react-icons/hi';
 import { FaLock, FaPhoneAlt, FaWhatsapp } from 'react-icons/fa';
 import { config } from '../data/config';
 
-const Logo = ({ className = "w-10 h-10" }) => (
-  <svg className={`${className} bg-secondary/80 rounded-full p-1 border border-primary/20 group-hover:scale-105 transition-transform duration-300`} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const Logo = ({ className = "w-10 h-10" }) => (
+  <svg className={`${className} bg-[#1C1412] rounded-full p-1 border border-gold/30 group-hover:scale-105 transition-transform duration-300 shadow-md`} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
     {/* Decorative outer golden dashed ring */}
     <circle cx="50" cy="50" r="44" stroke="#D4AF37" strokeWidth="1.5" strokeDasharray="5 3" opacity="0.7" />
     

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { auth } from '../firebase';
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
-import { FaLock, FaEnvelope, FaSignInAlt, FaPaperPlane } from 'react-icons/fa';
+import { FaLock, FaEnvelope, FaSignInAlt, FaPaperPlane, FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Logo } from '../components/Navbar';
+import AmbientBackground from '../components/AmbientBackground';
 
 const AdminLogin = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [loading, setLoading] = useState(false);
@@ -64,27 +67,29 @@ const AdminLogin = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-lightBg relative overflow-hidden px-4 sm:px-6">
-      {/* Decorative background overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(230,90,0,0.06),transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(122,26,34,0.06),transparent_50%)]" />
+    <div className="min-h-screen flex items-center justify-center bg-[#120D0B] text-[#FAF5EC] relative overflow-hidden px-4 sm:px-6 py-12">
+      {/* Shared Ambient Antigravity Background Component */}
+      <AmbientBackground />
       
-      {/* Mandala accent */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-no-repeat bg-contain opacity-5 pointer-events-none" 
-        style={{ backgroundImage: "url('/favicon.svg')" }} 
-      />
+      {/* Decorative Overlay */}
+      <div className="absolute inset-0 mandala-pattern opacity-10 pointer-events-none z-0" />
       
-      <div className="max-w-md w-full bg-white rounded-3xl shadow-premium border border-primary/10 overflow-hidden relative z-10">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-md w-full bg-[#1C1412]/90 backdrop-blur-xl rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.8)] border border-gold/30 overflow-hidden relative z-10"
+      >
         
-        {/* Top saffron/maroon header banner */}
-        <div className="bg-gradient-to-r from-accent to-primary p-8 text-center text-white relative">
-          <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-4 border border-white/20 shadow-inner">
+        {/* Top Mahogany & Gold Header Banner */}
+        <div className="bg-gradient-to-r from-[#2A1813] via-[#3D1E16] to-[#2A1813] p-8 text-center border-b border-gold/20 relative">
+          <div className="w-16 h-16 bg-gold/10 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gold/30 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
             <Logo className="w-12 h-12" />
           </div>
-          <h2 className="font-heading font-black text-2xl tracking-wider text-white">
-            AMBIKA <span className="text-gold">CAFE</span>
+          <h2 className="font-heading font-black text-2xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-gold to-amber-300">
+            AMBIKA <span className="text-primary">CAFE</span>
           </h2>
-          <p className="text-white/85 text-xs font-sans mt-1 tracking-widest uppercase">
+          <p className="text-amber-200/80 text-xs font-sans mt-1.5 tracking-widest uppercase font-bold">
             {isForgotMode ? 'Reset Management Access' : 'Management Portal Control'}
           </p>
         </div>
@@ -92,15 +97,15 @@ const AdminLogin = ({ onLoginSuccess }) => {
         {/* Login or Forgot password form */}
         <form onSubmit={isForgotMode ? handleResetPassword : handleSubmit} className="p-8 space-y-6">
           {error && (
-            <div className="p-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl flex items-center space-x-2 font-sans">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-600 shrink-0" />
+            <div className="p-4 bg-red-950/80 border border-red-500/40 text-red-200 text-sm rounded-xl flex items-center space-x-2 font-sans shadow-inner">
+              <span className="w-2.5 h-2.5 rounded-full bg-red-500 shrink-0 animate-pulse" />
               <span className="font-medium">{error}</span>
             </div>
           )}
 
           {successMessage && (
-            <div className="p-4 bg-green-50 border border-green-200 text-green-700 text-sm rounded-xl flex items-center space-x-2 font-sans">
-              <span className="w-2.5 h-2.5 rounded-full bg-green-600 shrink-0" />
+            <div className="p-4 bg-emerald-950/80 border border-emerald-500/40 text-emerald-200 text-sm rounded-xl flex items-center space-x-2 font-sans shadow-inner">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0 animate-pulse" />
               <span className="font-medium">{successMessage}</span>
             </div>
           )}
@@ -110,11 +115,11 @@ const AdminLogin = ({ onLoginSuccess }) => {
               <div className="space-y-5">
                 {/* Email Field */}
                 <div>
-                  <label className="block text-xs font-bold text-accent tracking-wider uppercase mb-2 font-heading">
+                  <label className="block text-xs font-bold text-amber-300 tracking-wider uppercase mb-2 font-heading">
                     Email Address
                   </label>
                   <div className="relative">
-                    <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-grayText">
+                    <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-gold/70">
                       <FaEnvelope className="text-sm" />
                     </span>
                     <input
@@ -123,7 +128,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
                       placeholder="Enter your email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-primary/10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm transition-all bg-white text-darkText"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-gold/20 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold text-sm transition-all bg-[#120D0B] text-amber-100 placeholder-amber-200/30"
                     />
                   </div>
                 </div>
@@ -131,7 +136,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
                 {/* Password Field */}
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <label className="block text-xs font-bold text-accent tracking-wider uppercase font-heading">
+                    <label className="block text-xs font-bold text-amber-300 tracking-wider uppercase font-heading">
                       Password
                     </label>
                     <button
@@ -141,23 +146,31 @@ const AdminLogin = ({ onLoginSuccess }) => {
                         setError('');
                         setSuccessMessage('');
                       }}
-                      className="text-xs text-primary hover:text-primary-dark font-semibold transition-colors duration-300"
+                      className="text-xs text-amber-400 hover:text-gold font-semibold transition-colors duration-300"
                     >
                       Forgot Password?
                     </button>
                   </div>
                   <div className="relative">
-                    <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-grayText">
+                    <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-gold/70">
                       <FaLock className="text-sm" />
                     </span>
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       required
                       placeholder="••••••••"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-primary/10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm transition-all bg-white text-darkText"
+                      className="w-full pl-10 pr-10 py-3 rounded-xl border border-gold/20 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold text-sm transition-all bg-[#120D0B] text-amber-100 placeholder-amber-200/30"
                     />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-gold/70 hover:text-gold transition-colors focus:outline-none cursor-pointer"
+                      title={showPassword ? "Hide Password" : "Show Password"}
+                    >
+                      {showPassword ? <FaEyeSlash className="text-base" /> : <FaEye className="text-base" />}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -166,7 +179,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-accent to-primary hover:from-primary hover:to-accent text-white font-heading font-bold text-sm tracking-wider uppercase py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-50"
+                className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-primary via-amber-600 to-amber-500 hover:from-amber-600 hover:to-primary text-white font-heading font-bold text-sm tracking-wider uppercase py-3.5 rounded-xl shadow-[0_0_20px_rgba(212,175,55,0.3)] border border-gold/40 hover:scale-[1.01] transition-all duration-300 disabled:opacity-50 cursor-pointer"
               >
                 {loading ? (
                   <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -183,11 +196,11 @@ const AdminLogin = ({ onLoginSuccess }) => {
               <div className="space-y-5">
                 {/* Email Field for Reset */}
                 <div>
-                  <label className="block text-xs font-bold text-accent tracking-wider uppercase mb-2 font-heading">
-                    Email Address
+                  <label className="block text-xs font-bold text-amber-300 tracking-wider uppercase mb-2 font-heading">
+                    Email Address Address
                   </label>
                   <div className="relative">
-                    <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-grayText">
+                    <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-gold/70">
                       <FaEnvelope className="text-sm" />
                     </span>
                     <input
@@ -196,7 +209,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
                       placeholder="Enter your registered email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-primary/10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm transition-all bg-white text-darkText"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-gold/20 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold text-sm transition-all bg-[#120D0B] text-amber-100 placeholder-amber-200/30"
                     />
                   </div>
                 </div>
@@ -206,7 +219,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-accent to-primary hover:from-primary hover:to-accent text-white font-heading font-bold text-sm tracking-wider uppercase py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-50"
+                className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-primary via-amber-600 to-amber-500 hover:from-amber-600 hover:to-primary text-white font-heading font-bold text-sm tracking-wider uppercase py-3.5 rounded-xl shadow-[0_0_20px_rgba(212,175,55,0.3)] border border-gold/40 hover:scale-[1.01] transition-all duration-300 disabled:opacity-50 cursor-pointer"
               >
                 {loading ? (
                   <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -218,7 +231,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
                 )}
               </button>
 
-              <div className="text-center">
+              <div className="text-center pt-2">
                 <button
                   type="button"
                   onClick={() => {
@@ -226,21 +239,23 @@ const AdminLogin = ({ onLoginSuccess }) => {
                     setError('');
                     setSuccessMessage('');
                   }}
-                  className="text-xs text-primary font-semibold hover:underline"
+                  className="text-xs text-amber-300 font-semibold hover:text-gold transition-colors inline-flex items-center space-x-1"
                 >
-                  ← Back to Login
+                  <FaArrowLeft className="text-[10px]" />
+                  <span>Back to Login</span>
                 </button>
               </div>
             </>
           )}
         </form>
 
-        <div className="bg-secondary/40 border-t border-primary/5 py-4 text-center">
-          <a href="/" className="text-xs text-primary font-semibold hover:underline">
-            ← Back to Customer Website
+        <div className="bg-[#120D0B]/80 border-t border-gold/15 py-4 text-center">
+          <a href="/" className="text-xs text-amber-300 font-semibold hover:text-gold transition-colors inline-flex items-center space-x-1">
+            <FaArrowLeft className="text-[10px]" />
+            <span>Back to Customer Website</span>
           </a>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

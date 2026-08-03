@@ -26,11 +26,11 @@ const AdminPortal = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-lightBg flex items-center justify-center font-sans text-darkText">
+      <div className="min-h-screen bg-[#120D0B] flex items-center justify-center font-sans text-amber-200">
         <div className="text-center space-y-4">
-          <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-xs uppercase tracking-widest text-grayText font-heading font-black">
-            Verifying Admin Session...
+          <div className="w-12 h-12 border-4 border-gold border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="text-xs uppercase tracking-widest text-amber-300 font-heading font-black">
+            Verifying Admin Access...
           </p>
         </div>
       </div>
