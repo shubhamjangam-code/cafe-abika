@@ -4,7 +4,7 @@ import { FaMapMarkerAlt, FaClock, FaPhoneAlt, FaWhatsapp } from 'react-icons/fa'
 import { config } from '../data/config';
 
 const Contact = ({ dynamicConfig }) => {
-  const phoneNum = dynamicConfig?.phone || config.phone;
+  const phoneNum = dynamicConfig?.phone || '7721802321';
   const addressText = dynamicConfig?.address || config.address;
   const hoursText = dynamicConfig?.hours || config.hours;
   const whatsappUrl = `https://wa.me/91${phoneNum}`;
@@ -40,12 +40,48 @@ const Contact = ({ dynamicConfig }) => {
           
           {/* Left Column - Contact Details Card */}
           <div className="lg:col-span-5 flex flex-col justify-between">
-            <div className="bg-secondary/40 rounded-3xl p-8 border border-primary/10 space-y-8 shadow-sm h-full flex flex-col justify-between">
+            <div className="bg-secondary/40 rounded-3xl p-8 border border-primary/10 space-y-6 shadow-sm h-full flex flex-col justify-between">
               
               <div className="space-y-6">
                 <h3 className="font-heading font-bold text-xl text-accent mb-4">
                   Contact Info
                 </h3>
+
+                {/* Phone & WhatsApp Contact */}
+                <div className="flex items-start space-x-4">
+                  <div className="p-3 bg-emerald-50 text-emerald-600 rounded-xl text-base flex-shrink-0 mt-0.5 border border-emerald-200">
+                    <FaWhatsapp className="text-lg" />
+                  </div>
+                  <div>
+                    <h4 className="font-heading font-bold text-accent text-sm uppercase tracking-wider">Phone & WhatsApp</h4>
+                    <p className="text-grayText text-xs sm:text-sm mt-0.5 font-sans font-light">
+                      <a 
+                        href={`tel:+91${phoneNum}`} 
+                        className="font-bold text-accent hover:text-primary transition-colors inline-block"
+                      >
+                        {phoneFormatted}
+                      </a>
+                    </p>
+                    <div className="mt-2 flex items-center space-x-2">
+                      <a
+                        href={whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center space-x-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition-colors"
+                      >
+                        <FaWhatsapp className="text-sm" />
+                        <span>Chat on WhatsApp</span>
+                      </a>
+                      <a
+                        href={`tel:+91${phoneNum}`}
+                        className="inline-flex items-center space-x-1.5 bg-accent hover:bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition-colors"
+                      >
+                        <FaPhoneAlt className="text-xs" />
+                        <span>Call Shop</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
 
                 {/* Address */}
                 <div className="flex items-start space-x-4">
@@ -57,19 +93,6 @@ const Contact = ({ dynamicConfig }) => {
                     <p className="text-grayText text-xs sm:text-sm mt-1 leading-relaxed font-sans font-light">
                       {addressText}
                     </p>
-                  </div>
-                </div>
-
-                {/* Phone & WhatsApp */}
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 bg-emerald-500/10 rounded-xl text-emerald-600 text-base flex-shrink-0 mt-0.5 border border-emerald-500/20">
-                    <FaPhoneAlt />
-                  </div>
-                  <div>
-                    <h4 className="font-heading font-bold text-accent text-sm uppercase tracking-wider">Phone & Direct Orders</h4>
-                    <a href={`tel:+91${phoneNum}`} className="text-emerald-700 font-bold text-sm sm:text-base hover:underline block mt-1">
-                      {phoneFormatted}
-                    </a>
                   </div>
                 </div>
 
@@ -85,26 +108,6 @@ const Contact = ({ dynamicConfig }) => {
                     </p>
                   </div>
                 </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-primary/10">
-                <a
-                  href={`tel:+91${phoneNum}`}
-                  className="flex-1 inline-flex items-center justify-center space-x-2 bg-accent hover:bg-primary text-white font-bold text-xs uppercase tracking-wider py-3 rounded-xl transition-all shadow-sm"
-                >
-                  <FaPhoneAlt />
-                  <span>Call Now</span>
-                </a>
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider py-3 rounded-xl transition-all shadow-sm"
-                >
-                  <FaWhatsapp className="text-sm" />
-                  <span>WhatsApp</span>
-                </a>
               </div>
 
             </div>

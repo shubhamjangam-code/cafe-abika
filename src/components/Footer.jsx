@@ -37,13 +37,8 @@ const Footer = ({ dynamicConfig }) => {
               </span>
             </Link>
             <p className="text-gray-400 text-xs sm:text-sm max-w-sm leading-relaxed font-sans font-light">
-              Serving fresh fast food, gourmet sandwiches, kulhad chai, cold coffee, and thick shakes in Islampur.
+              Serving delicious fast food, refreshing beverages, and warm memories in Islampur. Experience modern vibes blended with divine taste.
             </p>
-            <div className="space-y-1.5 pt-2 text-xs text-amber-200/90 font-sans">
-              <p>📍 <strong className="text-white">Address:</strong> {dynamicConfig?.address || config.address}</p>
-              <p>🕒 <strong className="text-white">Hours:</strong> {dynamicConfig?.hours || config.hours}</p>
-              <p>📞 <strong className="text-white">Phone:</strong> <a href={`tel:+91${phoneNum}`} className="hover:underline text-gold">{phoneFormatted}</a></p>
-            </div>
           </div>
 
           {/* Column 2 - Quick Links */}
