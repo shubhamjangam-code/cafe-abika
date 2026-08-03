@@ -82,10 +82,6 @@ const Hero = ({ dynamicConfig }) => {
           <span className="bg-gradient-to-r from-amber-200 via-gold to-amber-100 bg-clip-text text-transparent font-extrabold">
             Islampur's Favorite Chai & Fast Bites Spot
           </span>
-          <span className="text-emerald-400 font-semibold text-[10px] sm:text-xs ml-1 flex items-center gap-1">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            100% Pure Veg
-          </span>
         </motion.div>
 
         {/* Large Premium Heading */}
