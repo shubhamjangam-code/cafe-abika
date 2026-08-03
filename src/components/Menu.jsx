@@ -7,7 +7,6 @@ import { collection, onSnapshot, doc, setDoc } from 'firebase/firestore';
 
 const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [vegOnly, setVegOnly] = useState(false);
   const [menuItems, setMenuItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
 
@@ -52,7 +51,7 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
     return () => unsubscribe();
   }, []);
 
-  // Filter items whenever menuItems, activeCategory, searchQuery or vegOnly changes
+  // Filter items whenever menuItems, activeCategory, or searchQuery changes
   useEffect(() => {
     let result = menuItems;
 
@@ -69,13 +68,8 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
       );
     }
 
-    // Filter by Veg status
-    if (vegOnly) {
-      result = result.filter(item => item.isVeg);
-    }
-
     setFilteredItems(result);
-  }, [menuItems, activeCategory, searchQuery, vegOnly]);
+  }, [menuItems, activeCategory, searchQuery]);
 
   const handleWhatsAppOrder = (itemName, price) => {
     const text = `Hi Ambika Cafe, I would like to order "${itemName}" (Rs. ${price}). Please confirm my order!`;
@@ -116,11 +110,10 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
           <div className="w-24 h-1 bg-gradient-to-r from-primary via-gold to-accent mx-auto mt-4 rounded-full" />
         </div>
 
-        {/* Search & Filter Bar Container */}
-        <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-10 bg-secondary/35 p-4 rounded-2xl border border-primary/10">
-          
+        {/* Search Bar Container */}
+        <div className="flex items-center justify-center mb-10 bg-secondary/35 p-4 rounded-2xl border border-primary/10 max-w-md mx-auto">
           {/* Search Box */}
-          <div className="relative w-full md:w-80">
+          <div className="relative w-full">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-grayText">
               <FaSearch className="text-sm" />
             </span>
@@ -131,23 +124,6 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-primary/10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm transition-all bg-white"
             />
-          </div>
-
-          {/* Veg Only Toggle */}
-          <div className="flex items-center space-x-3 w-full md:w-auto justify-end">
-            <span className="text-sm font-semibold text-accent font-sans">Vegetarian Only</span>
-            <button
-              onClick={() => setVegOnly(!vegOnly)}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300 focus:outline-none ${
-                vegOnly ? 'bg-primary' : 'bg-gray-300'
-              }`}
-            >
-              <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-300 ${
-                  vegOnly ? 'translate-x-6' : 'translate-x-1'
-                }`}
-              />
-            </button>
           </div>
         </div>
 
@@ -197,14 +173,6 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   
-                  {/* Veg / Non-Veg Badge */}
-                  <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-lg border border-primary/10 flex items-center space-x-1 shadow-sm">
-                    <span className={`w-2.5 h-2.5 rounded-full ${item.isVeg ? 'bg-green-600' : 'bg-red-600'}`} />
-                    <span className="text-[10px] font-bold text-accent uppercase tracking-wider font-sans">
-                      {item.isVeg ? 'Veg' : 'Non-Veg'}
-                    </span>
-                  </div>
-
                   {/* Rating Badge */}
                   <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-lg flex items-center space-x-1 shadow-sm">
                     <FaStar className="text-yellow-500 text-xs" />
@@ -244,7 +212,6 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
                       </span>
                     </div>
 
-
                   </div>
                 </div>
 
@@ -262,7 +229,7 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
           >
             <p className="text-grayText text-lg">No dishes found matching your criteria.</p>
             <button
-              onClick={() => { setActiveCategory('all'); setSearchQuery(''); setVegOnly(false); }}
+              onClick={() => { setActiveCategory('all'); setSearchQuery(''); }}
               className="mt-4 text-primary font-semibold hover:underline"
             >
               Reset Filters

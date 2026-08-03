@@ -121,7 +121,7 @@ export const menuItems = [
     description: "A cup of freshly brewed hot ginger-cardamom tea served with a soft bun loaded with fresh maska (butter).",
     price: 45,
     category: "beverages",
-    image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&q=80&w=600",
+    image: "https://images.unsplash.com/photo-1561336313-0bd5e0b27ec8?auto=format&fit=crop&q=80&w=600",
     rating: 4.9,
     isVeg: true,
     isPopular: true,
