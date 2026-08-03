@@ -11,7 +11,7 @@ const features = [
   {
     icon: <FaTags className="text-amber-600" />,
     title: "Affordable Pricing",
-    desc: "Luxury dining experience and premium food taste at prices that are friendly to your wallet."
+    desc: "Casual cafe vibe and fresh gourmet fast food at prices that are friendly to your wallet."
   },
   {
     icon: <FaAward className="text-yellow-600" />,

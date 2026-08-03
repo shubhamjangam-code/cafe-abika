@@ -52,13 +52,16 @@ const About = () => {
             transition={{ duration: 0.7 }}
             className="lg:col-span-7 flex flex-col justify-center"
           >
-            <h2 className="font-marathi-heading font-black text-3xl sm:text-4xl text-accent mb-6 leading-tight">
-              आपला हक्काचा अंबिका कॅफे!
+            <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-heading font-bold uppercase tracking-wider mb-3">
+              <span>100% Pure Veg Casual Cafe</span>
+            </div>
+            <h2 className="font-marathi-heading font-black text-3xl sm:text-4xl text-accent mb-4 leading-tight">
+              आपला हक्काचा १००% शुद्ध शाकाहारी कॅज्युअल कॅफे!
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-accent mb-6 rounded-full" />
             
             <p className="text-grayText text-sm sm:text-base leading-relaxed font-marathi-body font-light mb-8">
-              इस्लामपूरकरांसाठी आपला लाडका आणि हक्काचा अंबिका कॅफे! जिथे लय भारी चव आणि मस्त शांत वातावरण एकत्र मिळतं. मित्रांसोबत गप्पा मारत गरमागरम कटिंग चहा, एकदम भारी आणि कुरकुरीत बर्गर, सँडविच आणि मस्त स्नॅक्सचा आस्वाद घ्यायला नक्की या. आमची क्वालिटी एक नंबर, स्वच्छता एकदम कडक आणि पाहुणचार तर अगदी घरचा! त्यामुळे प्रत्येक घासात तुम्हाला मिळेल तोच घरचा जिव्हाळा.
+              इस्लामपूरकरांसाठी आपला लाडका १००% शुद्ध शाकाहारी कॅज्युअल कॅफे! जिथे मित्रांसोबत गप्पा मारत गरमागरम स्पेशल कुल्हड चहा, कोल्ड कॉफी, थिक शेक्स आणि एकदम भारी कुरकुरीत बर्गर, ग्रिल्ड सँडविच आणि मस्त स्नॅक्सचा आनंद घेता येतो. कॅज्युअल हँगआउट आणि क्विक बाईट्ससाठी तुमची हक्काची जागा!
             </p>
 
             {/* Highlights Grid */}

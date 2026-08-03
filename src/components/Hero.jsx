@@ -33,34 +33,69 @@ const Hero = ({ dynamicConfig }) => {
       {/* Main Content Area */}
       <div className="relative z-20 max-w-5xl mx-auto px-4 text-center flex flex-col items-center">
         
+        {/* Category / Venue Type Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: -15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="inline-flex items-center space-x-2 bg-primary/20 backdrop-blur-md text-amber-300 px-4 py-1.5 rounded-full text-xs sm:text-sm font-heading font-bold uppercase tracking-widest mb-6 border border-primary/40 shadow-lg"
+        >
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span>100% Pure Veg Casual Cafe & Beverage Bar</span>
+        </motion.div>
 
-        {/* Large Premium Devotional-Blend Heading */}
+        {/* Large Premium Heading */}
         <motion.h1
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.8 }}
           className="font-heading font-black text-white tracking-wide leading-tight text-shadow-premium uppercase"
         >
-          <span className="text-xl sm:text-3xl md:text-4xl block sm:inline">Good Food <span className="text-primary">.</span> Good Vibes</span>
-          <span className="text-gold tracking-widest block mt-2 text-3xl sm:text-5xl md:text-6xl font-heading">Divine Taste</span>
+          <span className="text-xl sm:text-3xl md:text-4xl block font-semibold text-secondary-dark">
+            Fresh Casual Bites <span className="text-primary">•</span> Artisan Drinks
+          </span>
+          <span className="text-gold tracking-widest block mt-2 text-3xl sm:text-5xl md:text-6xl font-heading">
+            Your Favorite Veg Cafe
+          </span>
         </motion.h1>
 
-        {/* Paragraph */}
+        {/* Clear Subtitle Value Proposition */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
           className="mt-6 text-sm sm:text-base md:text-lg text-secondary-dark max-w-2xl font-light leading-relaxed"
         >
-          {subtitleText}
+          Islampur's go-to casual eatery for 100% pure vegetarian fast food & handcrafted beverages. From gourmet grilled sandwiches and crispy burgers to artisan kulhad chai, cold coffee, and thick shakes — crafted fresh for great food and quick hangouts.
         </motion.p>
+
+        {/* 3 Quick Value Pillars */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-3xl"
+        >
+          <div className="bg-white/10 backdrop-blur-md border border-white/15 px-4 py-2.5 rounded-xl text-xs text-amber-200 font-sans flex items-center justify-center space-x-2">
+            <span>☕</span>
+            <span className="font-semibold">Specialty Chai & Coffee</span>
+          </div>
+          <div className="bg-white/10 backdrop-blur-md border border-white/15 px-4 py-2.5 rounded-xl text-xs text-amber-200 font-sans flex items-center justify-center space-x-2">
+            <span>🍔</span>
+            <span className="font-semibold">Crispy Sandwiches & Fast Food</span>
+          </div>
+          <div className="bg-white/10 backdrop-blur-md border border-white/15 px-4 py-2.5 rounded-xl text-xs text-amber-200 font-sans flex items-center justify-center space-x-2">
+            <span>🌿</span>
+            <span className="font-semibold">Cozy Pure Veg Hangout</span>
+          </div>
+        </motion.div>
 
         {/* Buttons Grid */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
-          className="mt-10 flex flex-col sm:flex-row gap-4 items-center justify-center w-full max-w-md sm:max-w-none"
+          className="mt-8 flex flex-col sm:flex-row gap-4 items-center justify-center w-full max-w-md sm:max-w-none"
         >
           <a
             href="#menu"

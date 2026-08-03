@@ -1,7 +1,7 @@
 export const services = [
   {
     id: 1,
-    title: "Luxury Dine In",
+    title: "Casual Cafe Dine-In",
     description: "Enjoy a cozy, warm, and aesthetically pleasing atmosphere with soft music, ambient lighting, and quick table service.",
     icon: "FaUtensils"
   },
@@ -44,7 +44,7 @@ export const services = [
   {
     id: 8,
     title: "Outdoor Catering",
-    description: "We bring Cafe Delight to your events! Premium live counters, coffee brewing setups, and customizable multicuisine menu catering.",
+    description: "We bring Ambika Cafe to your events! Live fast-food counters, tea & coffee setups, and customizable menu catering.",
     icon: "FaClipboardList"
   },
   {
