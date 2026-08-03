@@ -14,8 +14,14 @@ const AmbientBackground = () => {
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden transform-gpu">
       {/* Rich Mahogany Dark Gradient Base */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#120D0B] via-[#1A120F] to-[#120D0B]" />
+
+      {/* Luxury Cinematic Dark Bokeh & Floating Silhouettes Overlay */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-screen pointer-events-none transform-gpu"
+        style={{ backgroundImage: "url('/ambika_cafe_admin_bg.png')" }}
+      />
       
-      {/* Optimized Golden Radial Ambient Lights (hidden heavy blur on tiny mobile screens) */}
+      {/* Optimized Golden Radial Ambient Lights */}
       <div className="hidden sm:block absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="hidden sm:block absolute bottom-1/3 left-1/4 w-[400px] h-[400px] bg-gold/10 rounded-full blur-[90px] pointer-events-none" />
 

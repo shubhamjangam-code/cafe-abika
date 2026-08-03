@@ -28,7 +28,8 @@ import {
   FaFolder, 
   FaRupeeSign, 
   FaUndo,
-  FaHome
+  FaHome,
+  FaSearch
 } from 'react-icons/fa';
 
 const AdminDashboard = ({ onLogout }) => {
@@ -36,7 +37,11 @@ const AdminDashboard = ({ onLogout }) => {
   const [items, setItems] = useState([]);
   const [settings, setSettings] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState({ text: '', type: '' }); // type: 'success' | 'error'
+  const [message, setMessage] = useState({ text: '', type: '' });
+
+  // Search & Filter states for Menu list
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState('all');
 
   // Form states for Add/Edit Menu Item
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -291,6 +296,14 @@ const AdminDashboard = ({ onLogout }) => {
   const vegCount = items.filter(item => item.isVeg).length;
   const popularCount = items.filter(item => item.isPopular || item.isChefRecommendation).length;
 
+  // Filtered menu items for vertical card list
+  const filteredItems = items.filter(item => {
+    const matchesSearch = (item.name || '').toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          (item.description || '').toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCat = selectedCategoryFilter === 'all' || item.category === selectedCategoryFilter;
+    return matchesSearch && matchesCat;
+  });
+
   return (
     <div className="min-h-screen bg-[#120D0B] text-[#FAF5EC] flex flex-col font-sans relative overflow-x-hidden">
       {/* Background Ambient Component */}
@@ -309,30 +322,30 @@ const AdminDashboard = ({ onLogout }) => {
       )}
 
       {/* Top Header */}
-      <header className="bg-[#18110E]/90 backdrop-blur-lg border-b border-gold/20 py-4 px-6 sm:px-8 flex items-center justify-between sticky top-0 z-40 shadow-2xl">
-        <div className="flex items-center space-x-3">
-          <Logo className="w-8 h-8" />
+      <header className="bg-[#18110E]/90 backdrop-blur-lg border-b border-gold/20 py-3.5 px-4 sm:px-8 flex items-center justify-between sticky top-0 z-40 shadow-2xl max-w-full overflow-hidden">
+        <div className="flex items-center space-x-2.5 sm:space-x-3 shrink-0">
+          <Logo className="w-7 h-7 sm:w-8 sm:h-8" />
           <div>
-            <h1 className="font-heading font-black text-lg sm:text-xl tracking-wider text-amber-200">
+            <h1 className="font-heading font-black text-base sm:text-xl tracking-wider text-amber-200">
               Ambika <span className="text-primary">Cafe</span>
             </h1>
-            <p className="text-[10px] text-amber-300/80 font-heading uppercase tracking-widest -mt-1 font-bold">
+            <p className="text-[9px] sm:text-[10px] text-amber-300/80 font-heading uppercase tracking-widest -mt-1 font-bold">
               Management Portal
             </p>
           </div>
         </div>
 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 sm:space-x-4 shrink-0">
           <a 
             href="/" 
-            className="flex items-center space-x-1.5 text-xs text-amber-200 hover:text-gold transition-colors font-medium border border-gold/30 rounded-full px-4 py-2 bg-gold/10 hover:bg-gold/20 shadow-sm"
+            className="flex items-center space-x-1 sm:space-x-1.5 text-[11px] sm:text-xs text-amber-200 hover:text-gold transition-colors font-medium border border-gold/30 rounded-full px-3 py-1.5 sm:px-4 sm:py-2 bg-gold/10 hover:bg-gold/20 shadow-sm"
           >
-            <FaHome className="text-sm text-gold" />
+            <FaHome className="text-xs sm:text-sm text-gold" />
             <span>Live Site</span>
           </a>
           <button 
             onClick={handleSignOut}
-            className="flex items-center space-x-1.5 text-xs bg-red-950/70 border border-red-500/40 text-red-300 px-4 py-2 rounded-full hover:bg-red-900/80 transition-colors font-medium cursor-pointer"
+            className="flex items-center space-x-1 sm:space-x-1.5 text-[11px] sm:text-xs bg-red-950/70 border border-red-500/40 text-red-300 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full hover:bg-red-900/80 transition-colors font-medium cursor-pointer"
           >
             <FaSignOutAlt />
             <span>Sign Out</span>
@@ -341,9 +354,9 @@ const AdminDashboard = ({ onLogout }) => {
       </header>
 
       {/* Main Layout Grid */}
-      <div className="flex-grow flex flex-col md:flex-row relative z-10">
+      <div className="flex-grow flex flex-col md:flex-row relative z-10 w-full max-w-full overflow-x-hidden">
         {/* Sidebar */}
-        <aside className="w-full md:w-64 bg-[#18110E]/80 backdrop-blur-md border-r border-gold/15 p-6 flex flex-col justify-between shrink-0">
+        <aside className="w-full md:w-64 bg-[#18110E]/80 backdrop-blur-md border-r border-gold/15 p-5 sm:p-6 flex flex-col justify-between shrink-0">
           <div className="space-y-6">
             <div>
               <p className="text-[10px] font-heading font-black text-gold/80 uppercase tracking-widest mb-3">
@@ -395,12 +408,12 @@ const AdminDashboard = ({ onLogout }) => {
         </aside>
 
         {/* Dashboard Content Area */}
-        <main className="flex-grow p-6 sm:p-8">
+        <main className="flex-grow p-4 sm:p-8 w-full max-w-full overflow-x-hidden min-w-0">
           
           {/* Quick Metrics (Only visible on Menu tab) */}
           {activeTab === 'menu' && (
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8">
-              <div className="bg-[#1C1412]/85 backdrop-blur-md p-5 rounded-2xl border border-gold/20 shadow-xl flex items-center justify-between">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6">
+              <div className="bg-[#1C1412]/85 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-gold/20 shadow-xl flex items-center justify-between">
                 <div>
                   <span className="text-[10px] text-amber-200/70 font-bold uppercase tracking-wider block font-heading">Total Dishes</span>
                   <span className="text-xl sm:text-2xl font-heading font-black text-amber-200">{totalDishes}</span>
@@ -410,7 +423,7 @@ const AdminDashboard = ({ onLogout }) => {
                 </div>
               </div>
 
-              <div className="bg-[#1C1412]/85 backdrop-blur-md p-5 rounded-2xl border border-gold/20 shadow-xl flex items-center justify-between">
+              <div className="bg-[#1C1412]/85 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-gold/20 shadow-xl flex items-center justify-between">
                 <div>
                   <span className="text-[10px] text-amber-200/70 font-bold uppercase tracking-wider block font-heading">Pure Veg</span>
                   <span className="text-xl sm:text-2xl font-heading font-black text-emerald-400">{vegCount}</span>
@@ -420,7 +433,7 @@ const AdminDashboard = ({ onLogout }) => {
                 </div>
               </div>
 
-              <div className="bg-[#1C1412]/85 backdrop-blur-md p-5 rounded-2xl border border-gold/20 shadow-xl flex items-center justify-between">
+              <div className="bg-[#1C1412]/85 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-gold/20 shadow-xl flex items-center justify-between">
                 <div>
                   <span className="text-[10px] text-amber-200/70 font-bold uppercase tracking-wider block font-heading">Featured</span>
                   <span className="text-xl sm:text-2xl font-heading font-black text-amber-300">{popularCount}</span>
@@ -441,104 +454,155 @@ const AdminDashboard = ({ onLogout }) => {
 
           {/* TAB 1: MANAGE MENU */}
           {activeTab === 'menu' && (
-            <div className="bg-[#1C1412]/90 backdrop-blur-md rounded-3xl shadow-2xl border border-gold/20 overflow-hidden">
-              <div className="p-6 border-b border-gold/15 flex items-center justify-between flex-wrap gap-4 bg-[#120D0B]/60">
+            <div className="space-y-4 w-full max-w-full">
+              {/* Header & Add Dish Button */}
+              <div className="bg-[#1C1412]/90 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xl border border-gold/20 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-[#120D0B]/60">
                 <div>
-                  <h2 className="font-heading font-black text-xl text-amber-200">Menu Items Manager</h2>
-                  <p className="text-xs text-amber-100/70 mt-1">Add, edit, or remove dishes dynamically from your live website.</p>
+                  <h2 className="font-heading font-black text-lg sm:text-xl text-amber-200">Menu Items Manager</h2>
+                  <p className="text-xs text-amber-100/70 mt-0.5">Manage dishes in a unified mobile vertical list layout.</p>
                 </div>
                 <button
                   onClick={openAddModal}
-                  className="flex items-center space-x-2 bg-gradient-to-r from-primary to-amber-600 hover:from-amber-600 hover:to-primary text-white text-xs font-heading font-black uppercase tracking-wider px-5 py-3 rounded-xl shadow-[0_0_15px_rgba(212,175,55,0.3)] border border-gold/30 transition-all hover:scale-105 cursor-pointer"
+                  className="flex items-center justify-center space-x-2 bg-gradient-to-r from-primary to-amber-600 hover:from-amber-600 hover:to-primary text-white text-xs font-heading font-black uppercase tracking-wider px-5 py-3 rounded-xl shadow-[0_0_15px_rgba(212,175,55,0.3)] border border-gold/30 transition-all hover:scale-[1.02] cursor-pointer shrink-0"
                 >
                   <FaPlus />
                   <span>Add New Dish</span>
                 </button>
               </div>
 
-              {/* Data Table */}
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr className="bg-[#120D0B]/90 text-amber-300 text-xs font-bold border-b border-gold/15 font-heading">
-                      <th className="p-4 pl-6">Dish Name</th>
-                      <th className="p-4">Category</th>
-                      <th className="p-4">Price</th>
-                      <th className="p-4">Veg Status</th>
-                      <th className="p-4">Badges</th>
-                      <th className="p-4 text-right pr-6">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gold/10 text-sm">
-                    {items.map((item) => (
-                      <tr key={item.id} className="hover:bg-[#251A17]/60 transition-colors">
-                        <td className="p-4 pl-6">
-                          <div className="flex items-center space-x-3.5">
-                            <img 
-                              src={item.image} 
-                              alt={item.name} 
-                              className="w-11 h-11 object-cover rounded-xl border border-gold/20 bg-black/40"
-                            />
-                            <div>
-                              <p className="font-bold text-amber-200">{item.name}</p>
-                              <p className="text-xs text-amber-100/60 line-clamp-1 max-w-xs">{item.description}</p>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="p-4 uppercase text-xs font-bold text-amber-200/80 tracking-wide">
+              {/* Search Bar & Category Filter Controls */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="sm:col-span-2 relative">
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-gold/70">
+                    <FaSearch className="text-sm" />
+                  </span>
+                  <input
+                    type="text"
+                    placeholder="Search menu by dish name or ingredient..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gold/20 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold text-xs sm:text-sm transition-all bg-[#1C1412]/90 text-amber-100 placeholder-amber-200/30 shadow-inner"
+                  />
+                </div>
+                <div>
+                  <select
+                    value={selectedCategoryFilter}
+                    onChange={(e) => setSelectedCategoryFilter(e.target.value)}
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-gold/20 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold text-xs sm:text-sm transition-all bg-[#1C1412]/90 text-amber-200 font-medium cursor-pointer"
+                  >
+                    <option value="all">All Categories</option>
+                    <option value="sandwiches-burgers">Sandwiches & Burgers</option>
+                    <option value="pizza-bites">Pizza & Fast Bites</option>
+                    <option value="breakfast-specials">Breakfast Specials</option>
+                    <option value="beverages">Tea, Coffee & Shakes</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Single Vertical Frame Multi-Row Structure for Each Menu Item */}
+              <div className="space-y-3.5">
+                {filteredItems.map((item) => (
+                  <div 
+                    key={item.id}
+                    className="bg-[#1C1412]/95 backdrop-blur-xl rounded-2xl p-4 border border-gold/25 shadow-xl hover:border-gold/50 transition-all duration-300 flex flex-col space-y-3"
+                  >
+                    {/* TOP ROW: Circular Food Image + Bold Gold Dish Name + Complete Description */}
+                    <div className="flex items-start space-x-3.5">
+                      {/* Circular Food Image */}
+                      <img 
+                        src={item.image} 
+                        alt={item.name} 
+                        className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-gold/40 shadow-md bg-black/60 shrink-0 mt-0.5"
+                      />
+                      
+                      {/* Dish Name & Description Text */}
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-heading font-extrabold text-amber-200 text-base sm:text-lg leading-tight tracking-wide">
+                          {item.name}
+                        </h3>
+                        <p className="text-xs text-amber-100/70 font-sans mt-1 leading-relaxed line-clamp-2 sm:line-clamp-none">
+                          {item.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* BOTTOM ROW: Category (Caps) + Price + Veg Status + Badges + Action Buttons */}
+                    <div className="pt-2.5 border-t border-gold/15 flex flex-wrap items-center justify-between gap-2.5">
+                      
+                      {/* Left Side Info Cluster */}
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 flex-1 min-w-0">
+                        
+                        {/* Category (Small Gold Caps) */}
+                        <span className="text-[10px] sm:text-xs font-heading font-extrabold text-gold/90 tracking-widest uppercase bg-gold/10 px-2 py-0.5 rounded border border-gold/20">
                           {item.category?.replace('-', ' ')}
-                        </td>
-                        <td className="p-4 font-bold text-amber-300 font-sans">
+                        </span>
+
+                        {/* Price (Larger Bold Gold Text) */}
+                        <span className="text-sm sm:text-base font-extrabold text-amber-300 font-sans tracking-wide">
                           ₹{item.price}
-                        </td>
-                        <td className="p-4">
-                          <span className={`inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-bold border ${
-                            item.isVeg 
-                              ? 'bg-emerald-950/80 text-emerald-400 border-emerald-500/40' 
-                              : 'bg-red-950/80 text-red-400 border-red-500/40'
-                          }`}>
-                            <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${item.isVeg ? 'bg-emerald-400' : 'bg-red-500'}`} />
-                            {item.isVeg ? 'Veg' : 'Non-Veg'}
-                          </span>
-                        </td>
-                        <td className="p-4 space-x-1.5">
+                        </span>
+
+                        {/* Veg Status (Green Button with Veg Dot & Text) */}
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-bold border ${
+                          item.isVeg 
+                            ? 'bg-emerald-950/90 text-emerald-400 border-emerald-500/50 shadow-[0_0_10px_rgba(16,185,129,0.2)]' 
+                            : 'bg-red-950/90 text-red-400 border-red-500/50 shadow-[0_0_10px_rgba(239,68,68,0.2)]'
+                        }`}>
+                          <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${item.isVeg ? 'bg-emerald-400 animate-pulse' : 'bg-red-500'}`} />
+                          {item.isVeg ? 'Veg' : 'Non-Veg'}
+                        </span>
+
+                        {/* Badges (Compact Tags) */}
+                        <div className="flex flex-wrap items-center gap-1">
                           {item.isPopular && (
-                            <span className="text-[9px] bg-amber-600 text-white font-bold uppercase tracking-widest px-2 py-0.5 rounded-md border border-amber-300/40">Bestseller</span>
+                            <span className="text-[9px] bg-amber-600/90 text-white font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-amber-300/40 shadow-sm">
+                              BESTSELLER
+                            </span>
                           )}
                           {item.isChefRecommendation && (
-                            <span className="text-[9px] bg-primary text-white font-bold uppercase tracking-widest px-2 py-0.5 rounded-md border border-amber-300/40">Chef's Choice</span>
+                            <span className="text-[9px] bg-primary/90 text-white font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-amber-300/40 shadow-sm">
+                              CHEF'S CHOICE
+                            </span>
                           )}
-                          {!item.isPopular && !item.isChefRecommendation && (
-                            <span className="text-xs text-amber-100/40 italic">Standard</span>
-                          )}
-                        </td>
-                        <td className="p-4 text-right pr-6 space-x-2">
-                          <button
-                            onClick={() => openEditModal(item)}
-                            className="p-2 text-amber-300 hover:bg-gold/20 rounded-xl transition-all inline-flex items-center justify-center border border-gold/20"
-                            title="Edit Item"
-                          >
-                            <FaEdit className="text-sm" />
-                          </button>
-                          <button
-                            onClick={() => handleDeleteItem(item.id)}
-                            className="p-2 text-red-400 hover:bg-red-950/80 rounded-xl transition-all inline-flex items-center justify-center border border-red-500/30"
-                            title="Delete Item"
-                          >
-                            <FaTrash className="text-sm" />
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                    {items.length === 0 && (
-                      <tr>
-                        <td colSpan="6" className="p-12 text-center text-amber-100/60 text-base font-light">
-                          No menu items found. Click <strong>"Reset Defaults"</strong> in sidebar to load initial dishes.
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
+                        </div>
+                      </div>
+
+                      {/* Right Side Action Buttons (Dark Circular Border Style) */}
+                      <div className="flex items-center space-x-2 shrink-0 ml-auto">
+                        {/* Edit Button (Yellowish pencil icon in dark circle) */}
+                        <button
+                          onClick={() => openEditModal(item)}
+                          className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#120D0B] border border-gold/40 text-amber-300 hover:text-gold hover:border-gold hover:bg-gold/20 transition-all duration-300 flex items-center justify-center shadow-md cursor-pointer"
+                          title="Edit Item"
+                        >
+                          <FaEdit className="text-xs sm:text-sm" />
+                        </button>
+
+                        {/* Delete Button (Red trash icon in dark circle) */}
+                        <button
+                          onClick={() => handleDeleteItem(item.id)}
+                          className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#120D0B] border border-red-500/40 text-red-400 hover:text-red-300 hover:border-red-500 hover:bg-red-950 transition-all duration-300 flex items-center justify-center shadow-md cursor-pointer"
+                          title="Delete Item"
+                        >
+                          <FaTrash className="text-xs sm:text-sm" />
+                        </button>
+                      </div>
+
+                    </div>
+                  </div>
+                ))}
+
+                {filteredItems.length === 0 && (
+                  <div className="bg-[#1C1412]/90 rounded-2xl p-8 text-center text-amber-100/60 border border-gold/20">
+                    <p className="text-sm">No menu items match your search or filter.</p>
+                    <button
+                      onClick={() => { setSearchTerm(''); setSelectedCategoryFilter('all'); }}
+                      className="mt-3 text-xs text-gold underline font-bold uppercase tracking-wider cursor-pointer"
+                    >
+                      Clear Filters
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -631,10 +695,10 @@ const AdminDashboard = ({ onLogout }) => {
 
       {/* DISH FORM MODAL (ADD / EDIT) */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-[#1C1412]/95 backdrop-blur-xl rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.9)] border border-gold/30 w-full max-w-xl overflow-hidden my-8 text-amber-100">
-            <div className="bg-gradient-to-r from-[#2A1813] via-[#3D1E16] to-[#2A1813] p-6 text-white flex items-center justify-between border-b border-gold/20">
-              <h3 className="font-heading font-black text-lg tracking-wider uppercase text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-gold to-amber-300">
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="bg-[#1C1412]/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.9)] border border-gold/30 w-full max-w-lg sm:max-w-xl overflow-hidden my-auto max-h-[90dvh] flex flex-col text-amber-100">
+            <div className="bg-gradient-to-r from-[#2A1813] via-[#3D1E16] to-[#2A1813] p-4 sm:p-6 text-white flex items-center justify-between border-b border-gold/20 shrink-0">
+              <h3 className="font-heading font-black text-base sm:text-lg tracking-wider uppercase text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-gold to-amber-300">
                 {editItem ? 'Edit Menu Dish' : 'Add New Menu Dish'}
               </h3>
               <button 
@@ -645,7 +709,7 @@ const AdminDashboard = ({ onLogout }) => {
               </button>
             </div>
 
-            <form onSubmit={handleMenuSubmit} className="p-6 space-y-4">
+            <form onSubmit={handleMenuSubmit} className="p-4 sm:p-6 space-y-4 overflow-y-auto flex-1">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 
                 {/* Dish Name */}

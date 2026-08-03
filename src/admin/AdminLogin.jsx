@@ -67,7 +67,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#120D0B] text-[#FAF5EC] relative overflow-hidden px-4 sm:px-6 py-12">
+    <div className="min-h-[100dvh] flex items-center justify-center bg-[#120D0B] text-[#FAF5EC] relative overflow-y-auto px-3.5 sm:px-6 py-6 sm:py-12">
       {/* Shared Ambient Antigravity Background Component */}
       <AmbientBackground />
       
@@ -78,24 +78,24 @@ const AdminLogin = ({ onLoginSuccess }) => {
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="max-w-md w-full bg-[#1C1412]/90 backdrop-blur-xl rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.8)] border border-gold/30 overflow-hidden relative z-10"
+        className="w-full max-w-sm sm:max-w-md mx-auto bg-[#1C1412]/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.8)] border border-gold/30 overflow-hidden relative z-10 my-auto"
       >
         
         {/* Top Mahogany & Gold Header Banner */}
-        <div className="bg-gradient-to-r from-[#2A1813] via-[#3D1E16] to-[#2A1813] p-8 text-center border-b border-gold/20 relative">
-          <div className="w-16 h-16 bg-gold/10 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gold/30 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
-            <Logo className="w-12 h-12" />
+        <div className="bg-gradient-to-r from-[#2A1813] via-[#3D1E16] to-[#2A1813] p-5 sm:p-8 text-center border-b border-gold/20 relative">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gold/10 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 border border-gold/30 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+            <Logo className="w-10 h-10 sm:w-12 sm:h-12" />
           </div>
-          <h2 className="font-heading font-black text-2xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-gold to-amber-300">
+          <h2 className="font-heading font-black text-xl sm:text-2xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-gold to-amber-300">
             AMBIKA <span className="text-primary">CAFE</span>
           </h2>
-          <p className="text-amber-200/80 text-xs font-sans mt-1.5 tracking-widest uppercase font-bold">
-            {isForgotMode ? 'Reset Management Access' : 'Management Portal Control'}
+          <p className="text-amber-200/80 text-[10px] sm:text-xs font-sans mt-1 tracking-widest uppercase font-bold">
+            {isForgotMode ? 'Reset Access' : 'Management Portal'}
           </p>
         </div>
 
         {/* Login or Forgot password form */}
-        <form onSubmit={isForgotMode ? handleResetPassword : handleSubmit} className="p-8 space-y-6">
+        <form onSubmit={isForgotMode ? handleResetPassword : handleSubmit} className="p-5 sm:p-8 space-y-4 sm:space-y-6">
           {error && (
             <div className="p-4 bg-red-950/80 border border-red-500/40 text-red-200 text-sm rounded-xl flex items-center space-x-2 font-sans shadow-inner">
               <span className="w-2.5 h-2.5 rounded-full bg-red-500 shrink-0 animate-pulse" />
