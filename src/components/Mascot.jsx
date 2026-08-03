@@ -32,7 +32,7 @@ const Mascot = () => {
   };
 
   return (
-    <div className="fixed bottom-24 right-6 z-40 flex flex-col items-end pointer-events-none">
+    <div className="fixed bottom-[84px] right-5 z-40 flex flex-col items-end pointer-events-none">
       {/* Speech Bubble */}
       <AnimatePresence>
         {showBubble && (

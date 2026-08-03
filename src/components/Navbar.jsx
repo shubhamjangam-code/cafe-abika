@@ -90,8 +90,8 @@ const Navbar = ({ setActiveCategory, dynamicConfig }) => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#120D0B]/90 backdrop-blur-lg shadow-2xl py-3 border-b border-gold/20'
-          : 'bg-gradient-to-b from-black/90 via-black/50 to-transparent py-5'
+          ? 'bg-[#120D0B]/95 backdrop-blur-xl shadow-2xl py-3 border-b border-[rgba(212,175,55,0.2)]'
+          : 'bg-gradient-to-b from-black/95 via-black/60 to-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

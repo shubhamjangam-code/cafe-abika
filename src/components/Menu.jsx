@@ -183,7 +183,7 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="flex items-center justify-start sm:justify-center gap-2.5 overflow-x-auto pb-6 mb-12 -mx-4 px-4 no-scrollbar"
+          className="flex items-center justify-start sm:justify-center gap-2.5 overflow-x-auto touch-pan-x scroll-smooth pb-4 mb-10 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar max-w-full"
         >
           {categories.map((cat) => (
             <button
@@ -219,7 +219,7 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.5, delay: (idx % 6) * 0.08 }}
                 whileHover={{ y: -6 }}
-                className="group bg-[#1C1412]/85 backdrop-blur-xl rounded-2xl overflow-hidden border border-[rgba(212,175,55,0.2)] hover:border-[rgba(212,175,55,0.6)] shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_0_25px_rgba(212,175,55,0.25)] transition-all duration-300 flex flex-col justify-between"
+                className="group bg-[#1C1412]/85 backdrop-blur-xl rounded-2xl overflow-hidden border border-[rgba(212,175,55,0.2)] hover:border-[rgba(212,175,55,0.6)] shadow-[0_8px_24px_rgba(212,175,55,0.15)] hover:shadow-[0_0_28px_rgba(212,175,55,0.3)] transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   {/* Top Image Container with Steam Animation */}

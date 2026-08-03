@@ -107,16 +107,10 @@ const Footer = ({ dynamicConfig }) => {
         </div>
 
         {/* Lower Footer */}
-        <div className="flex flex-col sm:flex-row justify-between items-center pt-8 text-xs text-gray-500 space-y-4 sm:space-y-0">
+        <div className="flex flex-col sm:flex-row justify-between items-center pt-8 text-xs text-amber-200/50 space-y-4 sm:space-y-0">
           <p>© {currentYear} {cafeTitle}. All Rights Reserved.</p>
-          <a
-            href="/admin"
-            className="text-gray-500 hover:text-primary transition-colors duration-300 font-heading text-[11px] tracking-widest uppercase font-bold"
-          >
-            Management Portal
-          </a>
-          <p className="flex items-center space-x-1 font-heading text-[11px] tracking-widest text-primary/80 uppercase font-black">
-            <span>Made with love and good vibes</span>
+          <p className="flex items-center space-x-1 font-heading text-[11px] tracking-widest text-amber-400/80 uppercase font-bold">
+            <span>Made with love & divine taste</span>
           </p>
         </div>
 

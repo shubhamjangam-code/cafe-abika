@@ -64,7 +64,7 @@ const About = () => {
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-primary via-gold to-amber-500 mb-6 rounded-full" />
             
-            <p className="text-amber-100/80 text-sm sm:text-base leading-relaxed font-marathi-body font-light mb-8">
+            <p className="text-amber-100/90 text-sm sm:text-base leading-loose font-marathi-body font-normal tracking-wide mb-8">
               इस्लामपूरकरांसाठी आपला लाडका १००% शुद्ध शाकाहारी कॅज्युअल कॅफे! जिथे मित्रांसोबत गप्पा मारत गरमागरम स्पेशल कुल्हड चहा, कोल्ड कॉफी, थिक शेक्स आणि एकदम भारी कुरकुरीत बर्गर, ग्रिल्ड सँडविच आणि मस्त स्नॅक्सचा आनंद घेता येतो. कॅज्युअल हँगआउट आणि क्विक बाईट्ससाठी तुमची हक्काची जागा!
             </p>
 
@@ -79,13 +79,15 @@ const About = () => {
                   transition={{ delay: i * 0.1, duration: 0.4 }}
                   className="flex flex-col items-start p-5 bg-[#1C1412]/85 backdrop-blur-md rounded-2xl border border-gold/20 hover:border-gold/60 shadow-xl hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-all duration-300 group"
                 >
-                  <div className="text-amber-300 text-lg p-2.5 bg-gold/10 border border-gold/20 rounded-xl group-hover:bg-gold group-hover:text-black transition-colors duration-300 mb-4 h-10 w-10 flex items-center justify-center">
-                    {h.icon}
+                  <div className="flex items-center space-x-3 mb-3">
+                    <div className="text-amber-300 text-base p-2 bg-gold/10 border border-gold/20 rounded-xl group-hover:bg-gold group-hover:text-black transition-colors duration-300 h-9 w-9 flex items-center justify-center shrink-0">
+                      {h.icon}
+                    </div>
+                    <h3 className="font-marathi-heading font-black text-amber-200 text-base group-hover:text-gold transition-colors duration-300 leading-tight">
+                      {h.title}
+                    </h3>
                   </div>
-                  <h3 className="font-marathi-heading font-black text-amber-200 text-base group-hover:text-gold transition-colors duration-300 mb-2">
-                    {h.title}
-                  </h3>
-                  <p className="text-amber-100/70 text-xs leading-relaxed font-marathi-body font-light">
+                  <p className="text-amber-100/80 text-xs leading-relaxed font-marathi-body font-normal tracking-wide">
                     {h.desc}
                   </p>
                 </motion.div>

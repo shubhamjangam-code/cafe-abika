@@ -32,7 +32,7 @@ const BackToTop = () => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.5, y: 20 }}
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-primary hover:bg-primary-dark text-white flex items-center justify-center shadow-lg hover:shadow-2xl active:scale-95 transition-all duration-300 group"
+          className="fixed bottom-5 right-5 z-40 w-12 h-12 rounded-full bg-primary hover:bg-primary-dark text-white flex items-center justify-center shadow-2xl hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] active:scale-95 transition-all duration-300 group border border-gold/30"
           aria-label="Back to Top"
         >
           <FaChevronUp className="text-lg group-hover:-translate-y-0.5 transition-transform duration-300" />
