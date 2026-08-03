@@ -33,6 +33,8 @@ const About = () => {
             <img
               src="/ambika_cafe_about.png"
               alt="Ambika Cafe Pure Veg Casual Ambience and Food"
+              loading="lazy"
+              decoding="async"
               className="rounded-2xl shadow-premium object-cover w-full h-[28rem] hover:scale-[1.01] transition-transform duration-500 border border-primary/10"
             />
             

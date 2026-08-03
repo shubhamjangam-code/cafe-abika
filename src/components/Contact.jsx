@@ -62,19 +62,19 @@ const Contact = ({ dynamicConfig }) => {
                         {phoneFormatted}
                       </a>
                     </p>
-                    <div className="mt-3 flex items-center space-x-2.5">
+                    <div className="mt-3 flex items-center flex-wrap gap-3">
                       <a
                         href={whatsappUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center space-x-1.5 bg-emerald-50 hover:bg-emerald-600 text-emerald-800 hover:text-white border border-emerald-300/60 hover:border-emerald-600 text-xs font-semibold px-3.5 py-1.5 rounded-full shadow-xs transition-all duration-300"
+                        className="inline-flex items-center space-x-1.5 bg-emerald-50 hover:bg-emerald-600 text-emerald-800 hover:text-white border border-emerald-300/60 hover:border-emerald-600 text-xs font-semibold px-4 py-2 rounded-full min-h-[44px] shadow-xs transition-all duration-300"
                       >
                         <FaWhatsapp className="text-sm text-emerald-600 group-hover:text-white" />
                         <span>WhatsApp</span>
                       </a>
                       <a
                         href={`tel:+91${phoneNum}`}
-                        className="inline-flex items-center space-x-1.5 bg-white hover:bg-accent text-accent hover:text-white border border-primary/20 hover:border-accent text-xs font-semibold px-3.5 py-1.5 rounded-full shadow-xs transition-all duration-300"
+                        className="inline-flex items-center space-x-1.5 bg-white hover:bg-accent text-accent hover:text-white border border-primary/20 hover:border-accent text-xs font-semibold px-4 py-2 rounded-full min-h-[44px] shadow-xs transition-all duration-300"
                       >
                         <FaPhoneAlt className="text-[10px]" />
                         <span>Call Direct</span>

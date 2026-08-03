@@ -33,15 +33,21 @@ const Hero = ({ dynamicConfig }) => {
       {/* Main Content Area */}
       <div className="relative z-20 max-w-5xl mx-auto px-4 text-center flex flex-col items-center">
         
-        {/* Category / Venue Type Badge */}
+        {/* Creative Venue Badge */}
         <motion.div
           initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center space-x-2 bg-primary/20 backdrop-blur-md text-amber-300 px-4 py-1.5 rounded-full text-xs sm:text-sm font-heading font-bold uppercase tracking-widest mb-6 border border-primary/40 shadow-lg"
+          className="inline-flex items-center space-x-2 bg-black/40 backdrop-blur-md text-amber-200 px-5 py-2 rounded-full text-xs sm:text-sm font-heading font-bold uppercase tracking-widest mb-6 border border-gold/30 shadow-xl"
         >
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span>100% Pure Veg Casual Cafe & Beverage Bar</span>
+          <span className="text-gold">✨</span>
+          <span className="bg-gradient-to-r from-amber-200 via-gold to-amber-100 bg-clip-text text-transparent font-extrabold">
+            Islampur's Favorite Chai & Fast Bites Spot
+          </span>
+          <span className="text-emerald-400 font-semibold text-[10px] sm:text-xs ml-1 flex items-center gap-1">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            100% Pure Veg
+          </span>
         </motion.div>
 
         {/* Large Premium Heading */}

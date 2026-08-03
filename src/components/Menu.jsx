@@ -152,7 +152,7 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
         </div>
 
         {/* Horizontal Category Tabs */}
-        <div className="flex items-center space-x-2 overflow-x-auto pb-4 mb-12 -mx-4 px-4 scrollbar-thin scrollbar-thumb-primary">
+        <div className="flex items-center gap-3 overflow-x-auto pb-4 mb-12 -mx-4 px-4 scrollbar-thin scrollbar-thumb-primary">
           {categories.map((cat) => (
             <button
               key={cat.id}
@@ -160,7 +160,7 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
                 setActiveCategory(cat.id);
                 setSearchQuery('');
               }}
-              className={`px-6 py-3 rounded-full text-xs font-heading font-bold tracking-wider uppercase transition-all duration-300 whitespace-nowrap border ${
+              className={`px-6 py-3 min-h-[44px] rounded-full text-xs font-heading font-bold tracking-wider uppercase transition-all duration-300 whitespace-nowrap border ${
                 activeCategory === cat.id
                   ? 'bg-accent text-white border-accent shadow-premium scale-105'
                   : 'bg-white text-accent border-primary/10 hover:border-primary/30 hover:bg-secondary'
@@ -194,6 +194,7 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
                     src={item.image}
                     alt={item.name}
                     loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   
@@ -238,7 +239,7 @@ const Menu = ({ activeCategory, setActiveCategory, dynamicConfig }) => {
 
                     <button
                       onClick={() => handleWhatsAppOrder(item.name, item.price)}
-                      className="inline-flex items-center space-x-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-2 rounded-xl transition-colors duration-300 shadow-sm"
+                      className="inline-flex items-center justify-center space-x-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl min-h-[44px] transition-colors duration-300 shadow-sm cursor-pointer"
                       title="Order via WhatsApp"
                     >
                       <FaWhatsapp className="text-sm" />

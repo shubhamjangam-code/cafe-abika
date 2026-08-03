@@ -189,16 +189,16 @@ const Navbar = ({ setActiveCategory, dynamicConfig }) => {
             </div>
 
             {/* Mobile Links */}
-            <nav className="flex flex-col space-y-4">
+            <nav className="flex flex-col space-y-2">
               {navLinks.map((link) => (
                 <a
                   key={link.id}
                   href={`#${link.id}`}
                   onClick={(e) => handleSmoothScroll(e, link.id)}
-                  className={`font-heading font-bold uppercase tracking-wider text-sm py-2 cursor-pointer transition-all duration-300 border-l-4 pl-3 rounded ${
+                  className={`font-heading font-bold uppercase tracking-wider text-sm py-3 px-4 min-h-[48px] flex items-center cursor-pointer transition-all duration-300 border-l-4 rounded-r-xl ${
                     activeSection === link.id
-                      ? 'text-primary border-primary bg-primary/5'
-                      : 'text-darkText border-transparent hover:text-primary hover:border-primary/20'
+                      ? 'text-primary border-primary bg-primary/10'
+                      : 'text-darkText border-transparent hover:text-primary hover:border-primary/20 hover:bg-secondary/40'
                   }`}
                 >
                   {link.label}
@@ -206,7 +206,7 @@ const Navbar = ({ setActiveCategory, dynamicConfig }) => {
               ))}
               <a
                 href="/admin"
-                className="font-heading font-bold uppercase tracking-wider text-sm py-2 cursor-pointer transition-all duration-300 border-l-4 pl-3 rounded text-darkText border-transparent hover:text-primary hover:border-primary/20 flex items-center space-x-2"
+                className="font-heading font-bold uppercase tracking-wider text-sm py-3 px-4 min-h-[48px] cursor-pointer transition-all duration-300 border-l-4 rounded-r-xl text-darkText border-transparent hover:text-primary hover:border-primary/20 hover:bg-secondary/40 flex items-center space-x-2 my-1"
               >
                 <FaLock className="text-xs text-primary/70" />
                 <span>Management Portal</span>
