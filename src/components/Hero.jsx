@@ -15,9 +15,9 @@ const Hero = ({ dynamicConfig }) => {
     >
       {/* Atmospheric Live Cafe Background Image */}
       <div 
-        className="absolute inset-0 w-full h-full bg-cover bg-center animate-zoom-bg opacity-75 transform-gpu"
+        className="absolute inset-0 w-full h-full bg-cover bg-center animate-zoom-bg opacity-65 transform-gpu"
         style={{ 
-          backgroundImage: "url('/ambika_cafe_ultra_luxury_hero.png')" 
+          backgroundImage: "url('/ambika_cafe_live_hero_bg.png')" 
         }}
       />
       
